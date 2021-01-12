@@ -60,6 +60,33 @@ p {
 	line-height: 1.9;
 }
 
+/*추가 css*/
+.login{
+	float:right;
+	list-style: none;
+	margin-bottom: 0;
+	line-height: 2rem;
+	display: flex;
+}
+.login-item {
+	font-size: 0.9rem;
+	font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+}
+.login-item-signup{
+padding-left: 15px;
+;
+}
+.login.active{
+	list-style: none;
+	margin-bottom: 0;
+	line-height: 0.8rem;
+}
+.login-box{
+	justify-content: center;
+}
+/*by.jaein*/
 .navbar { 
 	width: 100%; 
 	padding-top: 0;
@@ -99,14 +126,14 @@ p {
 	background: #ee5057;	
 }
 
-.tm-top-bar .navbar-expand-lg .navbar-nav .nav-link { padding: 50px 35px; }
+.tm-top-bar .navbar-expand-lg .navbar-nav .nav-link { padding: 15px 30px; }
 
 .tm-top-bar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0;
+    padding-top: 10;
     z-index: 10000;
     transition: all 0.2s ease-in-out;
     height: 119px;
@@ -118,7 +145,7 @@ p {
 	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 }
 
-.tm-top-bar.active .navbar-expand-lg .navbar-nav .nav-link { padding: 30px 35px; }
+.tm-top-bar.active .navbar-expand-lg .navbar-nav .nav-link { padding: 10px 30px; }
 .tm-top-bar-bg { height: 119px; }
 .tm-section { min-height: 515px; }
 
@@ -233,8 +260,8 @@ select.tm-select::-ms-expand { display: none; }
 	padding: 0.75rem 0.75rem 0.75rem 45px;
 }
 
-.tm-search-form .tm-form-element { width: 33.3333%; }
-.tm-search-form .tm-form-element-2 { width: 25%; }
+.tm-search-form .tm-form-element { width: 25%; }
+.tm-search-form .tm-form-element-2 { width: 20%; }
 .tm-search-form-row { width: 900px; }
 .tm-btn-search { width: 100%; }
 
