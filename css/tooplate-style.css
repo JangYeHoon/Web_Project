@@ -91,7 +91,22 @@ padding-left: 15px;
 	display: flex;
 }
 
+.searchList{
+	list-style: none;
+}
+.searchList-item{
+	margin-bottom: 15px;
+	display: flex;
+}
+.logo-item img{
+	width:40px;
+	height: 40px;
+}
 
+.logo-item {
+	padding-top:20px;
+  	flex-direction: column;
+}
 
 /*by.jaein*/
 .navbar { 
@@ -157,7 +172,7 @@ padding-left: 15px;
 .tm-section { min-height: 515px; }
 
 .tm-section-pad {
-	padding-top: 80px;
+	padding-top: 20px;
 	padding-bottom: 80px;
 }
 
