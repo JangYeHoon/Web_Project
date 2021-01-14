@@ -90,18 +90,20 @@ https://www.tooplate.com/view/2095-level
                         <div class=" col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-5 mt-3 mt-md-0">
                             <div class="tm-bg-white tm-p-4">
                                 <form action="index.html" method="post" class="contact-form">
-                                    <div class="form-group">
-                                        <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Email"  required/>
+                                    <div class="form-group email">
+                                        <input type="email" id="contact_email" name="contact_email" class="form-control email" placeholder="Email"  required/>
+                                        <button type="submit" class="btn btn-primary tm-btn-primary email">check</button>
                                     </div>
                                      <!-- 아이디 중복확인 버튼 추가-->
                                     <div class="form-group">
                                         <input type="password" id="contact_subject" name="contact_subject" class="form-control" placeholder="Password"  required/>
                                         <!-- Passwrod 규칙 체크-->
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" id="contact_idfront" name="contact_idfront" class="form-control" placeholder="YYMMDD" maxlength="6">-
-                                        <input type="text" id="contact_idback" name="contact_idback" class="form-control">
-                                        ******
+                                    <div class="form-group id">
+                                        <input type="text" id="contact_idfront" name="contact_idfront" class="form-control id" placeholder="YYMMDD" maxlength="6">
+                                        <h4>&nbsp - &nbsp</h4>
+                                        <input type="text" id="contact_idback" name="contact_idback" class="form-control idback"> <h4>******</h4>
+                                        
                                     </div>
                                     <div class="form-group">
                                         <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
