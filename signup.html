@@ -95,16 +95,30 @@ https://www.tooplate.com/view/2095-level
                                     </div>
                                      <!-- 아이디 중복확인 버튼 추가-->
                                     <div class="form-group">
-                                        <input type="password" id="contact_subject" name="contact_subject" class="form-control" placeholder="Subject"  required/>
+                                        <input type="password" id="contact_subject" name="contact_subject" class="form-control" placeholder="Password"  required/>
+                                        <!-- Passwrod 규칙 체크-->
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" id="contact_subject" name="contact_subject" class="form-control" placeholder="Subject"  required/>
+                                        <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Name"  required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" id="contact_subject" name="contact_subject" class="form-control" placeholder="Subject"  required/>
+                                        <input type="text" id="contact_englishname" name="contact_englishname" class="form-control" placeholder="EnglishName"  required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" id="contact_subject" name="contact_subject" class="form-control" placeholder="Subject"  required/>
+                                        <input type="text" id="contact_phone" name="contact_phone" class="form-control" placeholder="Phone"  required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="contact_passport" name="contact_passport" class="form-control" placeholder="Passport No."  required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" list="country" id="contact_country" name="contact_country" class="form-control" placeholder="Country" required/>
+                                        <datalist id="contact_country">
+                                            <option value="대한민국">
+                                            <option value="미국">
+                                            <option value="일본">
+                                            <option value="중국">
+                                            <option value="영국">
+                                        </datalist>
                                     </div>
                                    
                                     <button type="submit" class="btn btn-primary tm-btn-primary">Login</button>
@@ -235,6 +249,41 @@ https://www.tooplate.com/view/2095-level
                 // Update the current year in copyright
                 $('.tm-current-year').text(new Date().getFullYear());                           
             });
+
+            var autoHypenPhone = function(str){
+                str = str.replace(/[^0-9]/g, '');
+                var tmp = '';
+                if( str.length < 4){
+                    return str;
+                }else if(str.length < 7){
+                    tmp += str.substr(0, 3);
+                    tmp += '-';
+                    tmp += str.substr(3);
+                    return tmp;
+                }else if(str.length < 11){
+                    tmp += str.substr(0, 3);
+                    tmp += '-';
+                    tmp += str.substr(3, 3);
+                    tmp += '-';
+                    tmp += str.substr(6);
+                    return tmp;
+                }else{              
+                    tmp += str.substr(0, 3);
+                    tmp += '-';
+                    tmp += str.substr(3, 4);
+                    tmp += '-';
+                    tmp += str.substr(7);
+                    return tmp;
+                }
+            
+                return str;
+            }
+            var phoneNum = document.getElementById('contact_phone');
+
+            phoneNum.onkeyup = function(){
+                console.log(this.value);
+                this.value = autoHypenPhone( this.value ) ;  
+            }
 
         </script>             
 
