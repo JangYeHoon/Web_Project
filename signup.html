@@ -96,7 +96,7 @@ https://www.tooplate.com/view/2095-level
                                     </div>
                                      <!-- 아이디 중복확인 버튼 추가-->
                                     <div class="form-group">
-                                        <input type="password" id="contact_subject" name="contact_subject" class="form-control" placeholder="Password"  required/>
+                                        <input type="password" id="contact_pw" name="contact_pw" class="form-control" placeholder="Password" onchange="check_pw()" required/>
                                         <!-- Passwrod 규칙 체크-->
                                     </div>
                                     <div class="form-group id">
@@ -227,9 +227,27 @@ https://www.tooplate.com/view/2095-level
                 $('.tm-current-year').text(new Date().getFullYear());                           
             });
 
-            var autoHypenPhone = function(str){
+            function check_pw() {
+                let pw = document.getElementById('contact_pw').value;
+                const SC = /[~!@#$%^&*]/;
+                const num = /[0-9]/;
+                const eng = /[a-zA-Z]/;
+
+                if (pw.length < 8)
+                {
+                    window.alert('비밀번호는 8글자 이상 입력해야 합니다.');
+                    document.getElementById('contact_pw').value = '';
+                }
+                else if (!num.test(pw) || !eng.test(pw) || !SC.test(pw))
+                {
+                    window.alert('비밀번호는 숫자, 영어, 특수문자 조합으로 만들어야 합니다.');
+                    document.getElementById('contact_pw').value = '';
+                }
+            }
+
+            let autoHypenPhone = function(str){
                 str = str.replace(/[^0-9]/g, '');
-                var tmp = '';
+                let tmp = '';
                 if( str.length < 4){
                     return str;
                 }else if(str.length < 7){
