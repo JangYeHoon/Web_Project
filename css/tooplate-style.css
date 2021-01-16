@@ -94,19 +94,39 @@ padding-left: 15px;
 .searchList{
 	list-style: none;
 }
-.searchList-item{
+.searchList-item, .searchList-checkedItem{
 	margin-bottom: 15px;
 	display: flex;
+	
 }
-.logo-item img{
+.searchList-item img{
 	width:40px;
 	height: 40px;
 }
 
-.logo-item {
-	padding-top:20px;
-  	flex-direction: column;
+.searchList-item div , .searchList-checkedItem div{
+	padding:10px 0 10px 0;
+	flex-direction: column;
+	justify-content: center;
 }
+
+
+.searchList-checkedItem div:first-child{
+	flex-grow: 0.5;
+}
+.searchList-checkedItem div:nth-child(4){
+	flex-grow: 1.5;
+}
+
+.searchList-item button , .searchList-checkedItem button{
+	padding: 10px 25px 10px 25px;  
+	margin-top: 5px;
+	margin-bottom: 5px;;
+    font-size: 1rem;
+}
+ .searchList-checkedItem h4{
+	 align-items: center;
+ }
 
 /*by.jaein*/
 .navbar { 
@@ -433,7 +453,7 @@ select.tm-select::-ms-expand { display: none; }
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	        align-items: center;
-	padding-left: 25px;
+	
 }
 
 .tm-media-body-v-center {
