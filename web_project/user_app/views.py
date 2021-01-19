@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .forms import UserForm
 from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .services import UserService
+from django.contrib import messages
 
 # Create your views here.
 def loginViews(request):
@@ -11,5 +14,15 @@ def signupViews(request):
 
 def userCheck(request):
     new_user = UserForm(request.POST)
-    #new_user.save()
+    new_user.save()
     return HttpResponseRedirect('/')
+
+def loginCheck(request):
+    user_id = request.POST['email']
+    user_pw = request.POST['password']
+    result = UserService().loginCheck(user_id, user_pw)
+    if result == True:
+        return HttpResponseRedirect('/')
+    else:
+        messages.add_message(request, messages.INFO, '등록된 ID가 없거나 비밀번호가 다릅니다.')
+        return render(request, 'login.html')
