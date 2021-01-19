@@ -22,7 +22,13 @@ def loginCheck(request):
     user_pw = request.POST['password']
     result = UserService().loginCheck(user_id, user_pw)
     if result == True:
-        return HttpResponseRedirect('/')
+        request.session['login_id'] = user_id
+        return render(request,'signup.html')
     else:
         messages.add_message(request, messages.INFO, '등록된 ID가 없거나 비밀번호가 다릅니다.')
         return render(request, 'login.html')
+
+def logout(request):
+    request.session.modidied = True
+    del request.session['login_id']
+    return HttpResponseRedirect('/')

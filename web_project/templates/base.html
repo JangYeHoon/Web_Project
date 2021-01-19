@@ -49,12 +49,25 @@ https://www.tooplate.com/view/2095-level
                                 <div class="navbar-brand mr-auto"style="height: 50%; box-sizing: border-box;
                                 width:100%;">
                                     <ul class="login ml-auto" >
+                                        {% if request.session.login_id %}
+                                         <!--session이 비어있으면 // 로그인하지 않은 상태-->
+                                         <li class="login-item">
+                                            <a class="login-item-login" href=""> 예약확인 </a>
+                                            
+                                        </li>
+                                        <li class="login-item">
+                                                <a class="login-item-signup" href="/user_app/logout" >logout</a>
+                                        </li>
+                                        {% else %}
+                                      
                                         <li class="login-item">
                                             <a class="login-item-login" href="/user_app/login">login</a>
                                         </li>
                                         <li class="login-item">
-                                            <a class="login-item-signup" href="/user_app/signup" style="padding-left:15;">signup</a>
+                                            <a class="login-item-signup" href="/user_app/signup" >signup</a>
                                         </li>
+                                        {% endif %}
+
                                     </ul>
                                 </div>
                                 <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">
