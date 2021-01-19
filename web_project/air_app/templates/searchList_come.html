@@ -40,7 +40,7 @@ https://www.tooplate.com/view/2095-level
                     <div class="row">
                         <nav class="navbar navbar-expand-lg narbar-light">
                             <div>
-                                <a class="navbar-brand mr-auto" href="index">
+                                <a class="navbar-brand mr-auto" href="/">
                                     <img src="{%static 'img/logo.png'%}" alt="Site logo">
                                     trip
                                 </a>
@@ -50,10 +50,10 @@ https://www.tooplate.com/view/2095-level
                                 width:100%;">
                                     <ul class="login ml-auto" >
                                         <li class="login-item">
-                                            <a class="login-item-login" href="login">login</a>
+                                            <a class="login-item-login" href="/user_app/login">login</a>
                                         </li>
                                         <li class="login-item">
-                                            <a class="login-item-signup" href="signup" style="padding-left:15;">signup</a>
+                                            <a class="login-item-signup" href="/user_app/signup" style="padding-left:15;">signup</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -153,7 +153,9 @@ https://www.tooplate.com/view/2095-level
                                                     <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">84,600원</h4>
                                                 </div> 
                                                  <div class="media-body tm-media-body tm-bg-gray m">
-                                                    <button class="btn btn-primary btn-searchList">선택</button>
+                                                    <form action="reservation" method="get">
+                                                        <button type="submit" class="btn btn-primary btn-searchList">예약</button>
+                                                    </form>
                                                 </div>                                                    
                                         </li>
 

@@ -40,7 +40,7 @@ https://www.tooplate.com/view/2095-level
                     <div class="row">
                         <nav class="navbar navbar-expand-lg narbar-light">
                             <div>
-                                <a class="navbar-brand mr-auto" href="">
+                                <a class="navbar-brand mr-auto" href="/">
                                     <img src="{%static 'img/logo.png'%}" alt="Site logo">
                                     trip
                                 </a>
@@ -50,10 +50,10 @@ https://www.tooplate.com/view/2095-level
                                 width:100%;">
                                     <ul class="login ml-auto" >
                                         <li class="login-item">
-                                            <a class="login-item-login" href="login">login</a>
+                                            <a class="login-item-login" href="/user_app/login">login</a>
                                         </li>
                                         <li class="login-item">
-                                            <a class="login-item-signup" href="signup" style="padding-left:15;">signup</a>
+                                            <a class="login-item-signup" href="/user_app/signup" style="padding-left:15;">signup</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -87,7 +87,7 @@ https://www.tooplate.com/view/2095-level
                     <div class="container ie-h-align-center-fix">
                         <div class="row">
                             <div class="col-xs-12 ml-auto mr-auto ie-container-width-fix">
-                                <form action="searchList_go" method="get" class="tm-search-form tm-section-pad-2">
+                                <form action="/air_app/searchList_go" method="POST" class="tm-search-form tm-section-pad-2">{% csrf_token %}
                                     <div class="form-row tm-search-form-row">
                                         <div class="form-group tm-form-element tm-form-element-100">
                                             <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
