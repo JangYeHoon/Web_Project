@@ -5,6 +5,7 @@ from .services import AirService
 
 # Create your views here.
 def reservation(request):
+    AirService().reservation(request)
     return render(request, 'reservation.html')
 
 # 조건에 맞는 가는편 항공권 출력

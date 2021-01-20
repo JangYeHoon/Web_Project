@@ -57,6 +57,8 @@
                                                     <form action="searchList_come" method="post">{% csrf_token %}
                                                         <input type="hidden" id="go_id" name="go_id" value="{{airline.id}}"></input>
                                                         <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>
+                                                        <input type="hidden" id="adult" name="adult" value="{{adult}}"></input>
+                                                        <input type="hidden" id="children" name="children" value="{{children}}"></input>
                                                         <input type="hidden" id="departure_data" name="departure_data" value="{{arrival_date}}"></input>
                                                         <input type="hidden" id="departure_place" name="departure_place" value="{{airline.arrival_place}}"></input>
                                                         <input type="hidden" id="arrival_place" name="arrival_place" value="{{airline.departure_place}}"></input>
