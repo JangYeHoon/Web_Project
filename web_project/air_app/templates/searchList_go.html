@@ -1,5 +1,6 @@
 {%extends "base.html"%}
 {% load static %}
+{% load humanize %}
 {%block content%}
             <div class="tm-section tm-section-pad tm-bg-gray searchList" id="tm-section-4">
                 <div class="container">
@@ -9,35 +10,60 @@
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-recommended-container">
                             <div class="tm-bg-white">
                                 <div class="tm-bg-primary tm-sidebar-pad">
-                                    <h3 class="tm-color-white tm-sidebar-title">가는편 선택|1월 11일</h3>                                    
+                                    <h3 class="tm-color-white tm-sidebar-title">가는편 선택|{{date_month}}월 {{date_day}}일</h3>
                                 </div>
                                 <div class="tm-sidebar-pad-2">
                                     <ul class="searchList">
                                        
                                         <li class="searchList-item">
+                                            {% for airline in airline_list %}
                                                 <div class="media-body tm-media-body tm-bg-gray">
-                                                    <img src="{%static 'img/tn-img-01.jpg'%}" alt="Image">
-                                                    <p class="text-uppercase tm-font-semibold tm-sidebar-item-title">아시아나</p>
+                                                    <!-- <img src="{%static 'img/tn-img-01.jpg'%}" alt="Image"> -->
+                                                    <img src="/media/air_img/{{airline.airline_id.air_img}}" alt="Image">
+                                                    <!-- <p class="text-uppercase tm-font-semibold tm-sidebar-item-title">아시아나</p> -->
+                                                    <p class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.airline_id.name}}</p>
                                                 </div>  <!--항공사 로고 대체 -->
 
                                                 <div class="media-body tm-media-body tm-bg-gray ">
-                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">06:05 - 07:10</h4>
-                                                    <p class="text-uppercase tm-font-semibold tm-sidebar-item-title">1월 11일(월)</p>
+                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.departure_time}} - {{airline.arrival_time}}</h4>
+                                                    <p class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.departure_data | date:'n월 j일 (D)'}}</p>
                                                 </div>  
                                                 <div class="media-body tm-media-body tm-bg-gray">
-                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">1시간 5분</h4>
-                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">GMP - CJU</h4>
+                                                    {% if seat == '1' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Economy Class</h4>
+                                                    {% elif seat == '2' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Premium Class</h4>
+                                                    {% elif seat == '3' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">Business Class</h4>
+                                                    {% elif seat == '4' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">First Class</h4>
+                                                    {% endif %}
+                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.departure_airport}} - {{airline.arrival_airport}}</h4>
                                                 </div> 
 
                                                 <div class="media-body tm-media-body tm-bg-gray ">
                                                     <p class="text-uppercase tm-font-semibold tm-sidebar-item-title"> 요금</p>
-                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">84,600원</h4>
+                                                    {% if seat == '1' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.economy_price | intcomma}}원</h4>
+                                                    {% elif seat == '2' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.premium_price | intcomma}}원</h4>
+                                                    {% elif seat == '3' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.business_class_price | intcomma}}원</h4>
+                                                    {% elif seat == '4' %}
+                                                        <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.first_class_price | intcomma}}원</h4>
+                                                    {% endif %}
                                                 </div> 
                                                  <div class="media-body tm-media-body tm-bg-gray m">
-                                                    <form action="searchList_come" method="get">
+                                                    <form action="searchList_come" method="post">{% csrf_token %}
+                                                        <input type="hidden" id="go_id" name="go_id" value="{{airline.id}}"></input>
+                                                        <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>
+                                                        <input type="hidden" id="departure_data" name="departure_data" value="{{arrival_date}}"></input>
+                                                        <input type="hidden" id="departure_place" name="departure_place" value="{{airline.arrival_place}}"></input>
+                                                        <input type="hidden" id="arrival_place" name="arrival_place" value="{{airline.departure_place}}"></input>
                                                         <button type="submit" class="btn btn-primary btn-searchList">선택</button>
                                                     </form>
-                                                </div>                                                 
+                                                </div>
+                                            {% endfor %}
                                         </li>
 
                                     </ul>
