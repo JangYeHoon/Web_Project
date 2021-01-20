@@ -4,9 +4,7 @@
 {%block content%}
             <div class="tm-section tm-section-pad tm-bg-gray searchList" id="tm-section-4">
                 <div class="container">
-                    <div class="row">
-                       
-                        
+                    <div class="row">                 
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-recommended-container">
                             <div class="tm-bg-white">
                                 <div class="tm-bg-primary tm-sidebar-pad">
@@ -14,6 +12,7 @@
                                 </div>
                                 <div class="tm-sidebar-pad-2">
                                     <ul class="searchList">
+                                        {% if airline_list%}
                                         {% for airline in airline_list %}
                                         <li class="searchList-item">
                                             
@@ -65,9 +64,17 @@
                                                         <button type="submit" class="btn btn-primary btn-searchList">선택</button>
                                                     </form>
                                                 </div>
-                                           
+                                               
+
                                         </li>
                                         {% endfor %}
+                                        {% else %}
+                                        <li class="searchList-item">
+                                            <div class="media-body tm-media-body tm-bg-gray ">
+                                                <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">검색결과가 없습니다</h4>
+                                            </div>
+                                        </li>
+                                        {% endif %}
                                     </ul>
                                    
                                 </div>

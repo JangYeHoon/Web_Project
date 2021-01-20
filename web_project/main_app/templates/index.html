@@ -10,7 +10,7 @@
                                     <div class="form-row tm-search-form-row">
                                         <div class="form-group tm-form-element tm-form-element-100">
                                             <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
-                                            <select name="departure_place" type="text" class="form-control tm-select" id="inputCity" >
+                                            <select name="departure_place" type="text" class="form-control tm-select" id="departureCity" >
                                                 <option value ="">출발</option>
                                                 {% for departure_place in departure_place_list %}
                                                 <option value="{{ departure_place.departure_place }}">{{ departure_place.departure_place }}</option> 
@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="form-group tm-form-element tm-form-element-100">
                                             <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
-                                            <select name="arrival_place" type="text" class="form-control tm-select" id="inputCity" >
+                                            <select name="arrival_place" type="text" class="form-control tm-select" id="arrivalCity" >
                                                 <option value="">도착</option>
                                                 {% for arrival_place in arrival_place_list %}
                                                 <option value="{{ arrival_place.arrival_place }}">{{ arrival_place.arrival_place }}</option> 
@@ -57,7 +57,6 @@
                                         <div class="form-group tm-form-element tm-form-element-2">                                            
                                             <select name="children" class="form-control tm-select" id="children">
                                                 <option value="">Children</option>
-                                                <option value="0">0</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
@@ -82,14 +81,14 @@
                                             <i class="fa fa-2x fa-plane tm-form-element-icon"></i>
                                         </div>
                                          <div class="form-group tm-form-element tm-form-element-2">
-                                            <select name="room" class="form-control tm-select" id="room">
+                                            <select name="round" class="form-control tm-select" id="round">
                                                 <option value="1">왕복</option>
                                                 <option value="2">편도</option>
                                             </select>
                                             <i class="fa fa-2x fa-plane tm-form-element-icon"></i>
                                         </div>
                                         <div class="form-group tm-form-element tm-form-element-2">
-                                            <button type="submit" class="btn btn-primary tm-btn-search">Check Availability</button>
+                                            <button type="submit" class="btn btn-primary tm-btn-search" onclick="return searchCheck()">Check Availability</button>
                                         </div>
                                       </div>
                                       <div class="form-row clearfix pl-2 pr-2 tm-fx-col-xs">
@@ -165,6 +164,34 @@
 {%endblock content%}
 {%block script%}
             <script>
+                 function searchCheck(){
+                   
+                    if(document.getElementById('departureCity').value == ""){
+                        window.alert("출발지 입력 필수")
+                        return false;
+                    }
+                    else if(document.getElementById('arrivalCity').value == ""){
+                        window.alert("도착지 입력 필수")
+                        return false;
+                    }
+                    else if(document.getElementById('departure_data').value == ""){
+                        window.alert("가는날짜 입력 필수")
+                        return false;
+                    }
+                    else if(document.getElementById('round').value == 1 && document.getElementById('arrival_data').value == ""){
+                        window.alert("오는 입력 필수")
+                        return false;
+                    }
+                    else if(document.getElementById('adult').value == "" && document.getElementById('children')){
+                        window.alert("인원수 입력 필수")
+                        return false;
+                    }
+                    else if(document.getElementById('seat').value == ""){
+                        window.alert("좌석 입력 필수")
+                        return false;
+                    }
+                }
+
                 function setCarousel() {
                     
                     if ($('.tm-article-carousel').hasClass('slick-initialized')) {
@@ -249,6 +276,7 @@
                     // Update the current year in copyright
                     $('.tm-current-year').text(new Date().getFullYear());                           
                 });
+               
 
             </script>
 {%endblock script%}
