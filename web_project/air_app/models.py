@@ -9,7 +9,7 @@ class Airline(models.Model):
 
 class Ticket(models.Model):
     objects = models.Manager()
-    airline_id = models.ForeignKey(Airline, on_delete=models.CASCADE)   # 항공사 외래키
+    airline_id = models.ForeignKey(Airline, on_delete=models.CASCADE, related_name="ticket")   # 항공사 외래키
     departure_place = models.CharField(max_length=50)  # 출발지
     arrival_place = models.CharField(max_length=50)    # 도착지
     departure_airport = models.CharField(max_length=10)    # 출발공항(공항코드)
@@ -24,7 +24,8 @@ class Ticket(models.Model):
 
 class Reservation(models.Model):
     objects = models.Manager()
-    user_id = models.ForeignKey(User, on_delete = models.CASCADE)   # 유저 외래키
-    go_ticket_id = models.ForeignKey(Ticket, on_delete=models.CASCADE)  # 가는편 외래키
-    cone_ticket_id = models.ForeignKey(Ticket, on_delete=models.CASCADE)    # 오는편 외래키
-    reservation_date = models.DateField()   # 예약날짜
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE, related_name="reservation")   # 유저 외래키
+    go_ticket_id = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="go_ticket", null=True)  # 가는편 외래키
+    come_ticket_id = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="come_ticket", null=True)    # 오는편 외래키
+    reservation_date = models.DateField(auto_now_add=True)   # 예약날짜
+    price = models.IntegerField()   # 결제금액
