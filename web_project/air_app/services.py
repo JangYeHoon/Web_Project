@@ -24,7 +24,7 @@ class AirService:
         context = {"airline_list":airline_list, "date_month":date[1], "date_day":date[2], "seat":seat, "go_airline":go_airline, "adult":adult, "children":children}
         return context
 
-    def reservation(self, request):
+    def reservation_add(self, request):
         user_id = request.session.get('login_id')
         if user_id:
             user = User.objects.get(email=user_id)
@@ -40,18 +40,20 @@ class AirService:
         children = request.POST['children']
         go_price = 0
         come_price = 0
-        if seat == 1:
+        if seat == '1':
             go_price = go_airline.economy_price
             come_price = come_airline.economy_price
-        elif seat == 2:
+        elif seat == '2':
             go_price = go_airline.premium_price
             come_price = come_airline.premium_price
-        elif seat == 3:
+        elif seat == '3':
             go_price = go_airline.business_class_price
             come_price = come_airline.business_class_price
-        elif seat == 4:
+        elif seat == '4':
             go_price = go_airline.first_class_price
             come_price = come_airline.first_class_price
         price = (go_price + come_price) * int(adult) + ((go_price + come_price) * 0.9) * int(children)
-        new_reservaion = Reservation(user_id=user.id, go_ticket_id=go_airline.id, come_ticket_id=come_airline.id, price=price)
+        new_reservaion = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=come_airline, price=price)
         new_reservaion.save()
+        context = {"new_reservation":new_reservaion}
+        return context

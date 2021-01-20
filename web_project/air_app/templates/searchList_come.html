@@ -95,7 +95,7 @@
                                                     {% endif %}
                                                 </div> 
                                                  <div class="media-body tm-media-body tm-bg-gray m">
-                                                    <form action="reservation" method="post">{% csrf_token %}
+                                                    <form action="reservation_add" method="post">{% csrf_token %}
                                                         <input type="hidden" id="go_id" name="go_id" value="{{go_airline.id}}"></input>
                                                         <input type="hidden" id="come_id" name="come_id" value="{{airline.id}}"></input>
                                                         <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>

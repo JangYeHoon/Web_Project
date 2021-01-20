@@ -4,9 +4,11 @@ from .models import Ticket
 from .services import AirService
 
 # Create your views here.
-def reservation(request):
-    AirService().reservation(request)
-    return render(request, 'reservation.html')
+def reservation_add(request):
+    context = AirService().reservation_add(request)
+    if context == False:
+        return render(request, 'user_app/login')
+    return render(request, 'reservation_complete.html', context)
 
 # 조건에 맞는 가는편 항공권 출력
 def searchList_go(request):
