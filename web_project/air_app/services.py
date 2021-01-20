@@ -57,3 +57,13 @@ class AirService:
         new_reservaion.save()
         context = {"new_reservation":new_reservaion}
         return context
+
+    def reservation_list(self, request):
+        user_id = request.session.get('login_id')
+        if user_id:
+            user = User.objects.get(email=user_id)
+        else:
+            return False
+        reservation_list = Reservation.objects.filter(user_id=user)
+        context = {"reservation_list":reservation_list}
+        return context

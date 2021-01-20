@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .froms import TicketForm
-from .models import Ticket
+from .models import Ticket, Reservation
 from .services import AirService
 
 # Create your views here.
@@ -9,6 +9,12 @@ def reservation_add(request):
     if context == False:
         return render(request, 'user_app/login')
     return render(request, 'reservation_complete.html', context)
+
+def reservation_list(request):
+    context = AirService().reservation_list(request)
+    if context == False:
+        return render(request, 'user_app/login')
+    return render(request, 'reservation_list.html', context)
 
 # 조건에 맞는 가는편 항공권 출력
 def searchList_go(request):
