@@ -5,3 +5,4 @@ from .services import MainService
 def indexViews(request):
     context = MainService().searchPlace()
     return render(request, 'index.html',context)
+
