@@ -10,11 +10,21 @@
                                     <div class="form-row tm-search-form-row">
                                         <div class="form-group tm-form-element tm-form-element-100">
                                             <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
-                                            <input name="departure_place" type="text" class="form-control" id="inputCity" placeholder="출발">
+                                            <select name="departure_place" type="text" class="form-control tm-select" id="inputCity" >
+                                                <option value ="">출발</option>
+                                                {% for departure_place in departure_place_list %}
+                                                <option value="{{ departure_place.departure_place }}">{{ departure_place.departure_place }}</option> 
+                                                {% endfor %}
+                                            </select>
                                         </div>
                                         <div class="form-group tm-form-element tm-form-element-100">
                                             <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
-                                            <input name="arrival_place" type="text" class="form-control" id="inputCity" placeholder="도착">
+                                            <select name="arrival_place" type="text" class="form-control tm-select" id="inputCity" >
+                                                <option value="">도착</option>
+                                                {% for arrival_place in arrival_place_list %}
+                                                <option value="{{ arrival_place.arrival_place }}">{{ arrival_place.arrival_place }}</option> 
+                                                {% endfor %}
+                                            </select>
                                         </div>
                                         <div class="form-group tm-form-element tm-form-element-50">
                                             <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
