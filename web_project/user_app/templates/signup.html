@@ -9,8 +9,9 @@
                             <div class="tm-bg-white tm-p-4">
                                 <form action="userCheck" method="post" class="contact-form">{% csrf_token %}
                                     <div class="form-group email">
-                                        <input type="email" id="contact_email" name="email" class="form-control email" placeholder="Email"  required/>
-                                        <button type="submit" class="btn btn-primary tm-btn-primary email">check</button>
+                                        <input type="email" id="contact_email" name="email" class="form-control email" placeholder="Email" check_result="fail" required/>
+                                        <button type="button" class="btn btn-primary tm-btn-primary email" id="id_overlap_check">check</button>
+                                        <i class="fa fa-check fa-3x signup_check" id="id_check_sucess" style="display: none;"></i>
                                     </div>
                                      <!-- 아이디 중복확인 버튼 추가-->
                                     <div class="form-group">
@@ -46,7 +47,7 @@
                                         </datalist>
                                     </div>
                                    
-                                    <button type="submit" class="btn btn-primary tm-btn-primary">Login</button>
+                                    <button type="submit" class="btn btn-primary tm-btn-primary" id="signUp">Sign Up</button>
                                 </form>
                             </div>                            
                         </div>
@@ -56,6 +57,52 @@
 {%endblock content%}
 {%block script%}
         <script>
+            $('#signUp').click(function(){
+                if($('#contact_email').attr("check_result")=="fail"){
+                    alert("아이디 중복체크를 해주세요")
+                    $('#contact_email').focus();
+                    return false;
+                }
+
+            })
+            $('#id_overlap_check').click(function(){               
+                $('#contact_email').change(function(){
+                    $('#id_check_sucess').hide();
+                    $('#id_overlap_check').show();
+                    $('#contct_email').attr("check_result","fail");
+                })
+
+                if($('#contact_email').val() == ""){
+                    alert('이메일을 입력해주세요')
+                    return;
+                }
+
+                id_overlap_input = document.querySelector('input[name="email"]')
+                
+                 $.ajax({
+                     url:'id_overlap_check',
+                     data : {
+                         'email': id_overlap_input.value
+                     },
+                     datatype : 'json',
+                     success:function(data){
+
+                         if(data['overlap'] == "fail"){
+                             alert("이미 존재하는 이메일 입니다.");
+                             id_overlap_input.focus();
+                             return;
+                         }else{
+                             alert("사용가능한 이메일입니다.");
+                             $('#contact_email').attr("check_result","success");
+                             $('#id_check_sucess').show();
+                            $('#id_overlap_check').hide();
+                            return;
+                         }
+                     }
+                 })
+            })
+
+           
 
 
                function setPageNav(){

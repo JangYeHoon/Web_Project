@@ -13,3 +13,12 @@ class UserService:
             return False
         except:
             return False
+    
+    def id_overlap_check(self,email):
+        try:
+            user = User.objects.get(email = email)
+            print(user.email)
+            return user
+        except:
+            user = None
+            return user

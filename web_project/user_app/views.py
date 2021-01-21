@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .services import UserService
 from django.contrib import messages
+from django.http import JsonResponse
+
 
 # Create your views here.
 def loginViews(request):
@@ -23,7 +25,7 @@ def loginCheck(request):
     result = UserService().loginCheck(user_id, user_pw)
     if result == True:
         request.session['login_id'] = user_id
-        return render(request,'signup.html')
+        return HttpResponseRedirect('/')
     else:
         messages.add_message(request, messages.INFO, '등록된 ID가 없거나 비밀번호가 다릅니다.')
         return render(request, 'login.html')
@@ -32,3 +34,18 @@ def logout(request):
     request.session.modidied = True
     del request.session['login_id']
     return HttpResponseRedirect('/')
+    
+
+    
+def id_overlap_check(request):
+    email = request.GET.get('email')
+
+    user = UserService().id_overlap_check(email)
+    print(user)
+    if user is None:
+        overlap = "pass"
+    else:
+        overlap = "fail"
+
+    context = {'overlap':overlap}
+    return JsonResponse(context)
