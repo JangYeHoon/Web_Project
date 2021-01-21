@@ -1,34 +1,33 @@
 {%extends "base.html"%}
 {% load static %}
+{% load humanize %}
 {%block content%}
             <div class="tm-section tm-section-pad tm-bg-gray searchList" id="tm-section-4">
                 <div class="container">
                     <div class="row">
-                       
-                        
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-recommended-container">
                             <div class="tm-bg-white">
                                 <div class="tm-bg-primary tm-sidebar-pad reservation-header">
                                     <div>
                                     <i class="fa fa-2x fa-plane"></i>
-                                    <h3 class="tm-color-white tm-sidebar-title">예약번호 000000 예약 날짜 : 1월 11일</h3>     
+                                    <h3 class="tm-color-white tm-sidebar-title">예약번호 {{new_reservation.id}} 예약 날짜 : {{new_reservation.reservation_date | date:'n월 j일'}}</h3>     
                                     </div>
-                                    <button class="btn btn-primary btn-reservation"  href="searchList2">예약 취소</button>                               
+                                    <button class="btn btn-primary btn-reservation">예약 완료</button>
                                 </div>
                                 <div class="tm-sidebar-pad-2">
-                                    <ul class="reservation-body">                                       
+                                    <ul class="reservation-body">
                                         <li class="reservation-item">
                                                 <div class="media-body tm-media-body ">
                                                     <table>
                                                         <tr>
                                                             <th>
-                                                                <h4 class="text-uppercase tm-font-semibold ">서울(GMP)</h4>
+                                                                <h4 class="text-uppercase tm-font-semibold ">{{new_reservation.go_ticket_id.departure_place}}({{new_reservation.go_ticket_id.departure_airport}})</h4>
                                                             </th>
                                                             <th>
                                                                 &nbsp----------&nbsp&nbsp&nbsp&nbsp&nbsp
                                                             </th>
                                                             <th>
-                                                                <h4 class="text-uppercase tm-font-semibold ">제주(CJU)</h4>
+                                                                <h4 class="text-uppercase tm-font-semibold ">{{new_reservation.go_ticket_id.arrival_place}}({{new_reservation.go_ticket_id.arrival_airport}})</h4>
                                                             </th>
                                                         </tr>
                                                         <tr>
@@ -44,29 +43,29 @@
                                                         </tr>
                                                         <tr>
                                                             <th>
-                                                                <h5 class="text-uppercase tm-font-normal ">1월 11일 06:05</h5>
+                                                                <h5 class="text-uppercase tm-font-normal ">{{new_reservation.go_ticket_id.departure_data | date:'n월 j일'}} {{new_reservation.go_ticket_id.departure_time | date:'H:i'}}</h5>
                                                             </th>
                                                             <th>
 
                                                             </th>
                                                             <th>
-                                                                <h5 class="text-uppercase tm-font-normal ">1월 11일 07:10</h5>
+                                                                <h5 class="text-uppercase tm-font-normal ">{{new_reservation.go_ticket_id.departure_data | date:'n월 j일'}} {{new_reservation.go_ticket_id.arrival_time | date:'H:i'}}</h5>
                                                             </th>
                                                         </tr>
                                                     </table>
-                                                    <h2 class="text-uppercase tm-font-semibold ">160,000원</h2>
+                                                    <h2 class="text-uppercase tm-font-semibold ">총 금액 {{new_reservation.price | intcomma}}원</h2>
                                                 </div>
                                                 <div class="media-body tm-media-body ">
                                                     <table>
                                                         <tr>
                                                             <th>
-                                                                <h4 class="text-uppercase tm-font-semibold ">제주(CJU)</h4>
+                                                                <h4 class="text-uppercase tm-font-semibold ">{{new_reservation.come_ticket_id.departure_place}}({{new_reservation.come_ticket_id.departure_airport}})</h4>
                                                             </th>
                                                             <th>
                                                                 &nbsp----------&nbsp&nbsp&nbsp&nbsp&nbsp
                                                             </th>
                                                             <th>
-                                                                <h4 class="text-uppercase tm-font-semibold ">서울(GMP)</h4>
+                                                                <h4 class="text-uppercase tm-font-semibold ">{{new_reservation.come_ticket_id.arrival_place}}({{new_reservation.come_ticket_id.arrival_airport}})</h4>
                                                             </th>
                                                         </tr>
                                                         <tr>
@@ -82,26 +81,22 @@
                                                         </tr>
                                                         <tr>
                                                             <th>
-                                                                <h5 class="text-uppercase tm-font-normal ">1월 13일 06:05</h5>
+                                                                <h5 class="text-uppercase tm-font-normal ">{{new_reservation.come_ticket_id.departure_data | date:'n월 j일'}} {{new_reservation.come_ticket_id.departure_time | date:'H:i'}}</h5>
                                                             </th>
                                                             <th>
 
                                                             </th>
                                                             <th>
-                                                                <h5 class="text-uppercase tm-font-normal ">1월 13일 07:10</h5>
+                                                                <h5 class="text-uppercase tm-font-normal ">{{new_reservation.come_ticket_id.departure_data | date:'n월 j일'}} {{new_reservation.come_ticket_id.arrival_time | date:'H:i'}}</h5>
                                                             </th>
                                                         </tr>
                                                     </table>
-                                                  
                                                 </div> 
-                                             
-                                         
+                                                <a class="btn btn-primary tm-btn-search" href="/">Home</a>
                                         </li>
-
                                     </ul>
-                                   
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
