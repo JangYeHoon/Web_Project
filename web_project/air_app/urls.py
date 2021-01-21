@@ -6,4 +6,5 @@ urlpatterns = [
     path('reservation_list', views.reservation_list, name='reservation_list'),
     path('searchList_go', views.searchList_go, name='searchList_go'),
     path('searchList_come', views.searchList_come, name='searchList_come'),
+    path('reservation_cancel', views.reservation_cancel, name='reservation_cancel'),
 ]

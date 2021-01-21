@@ -13,7 +13,10 @@
                                     <i class="fa fa-2x fa-plane"></i>
                                     <h3 class="tm-color-white tm-sidebar-title">예약번호 {{reservation.id}} 예약 날짜 : {{reservation.reservation_date | date:'n월 j일'}}</h3>     
                                     </div>
-                                    <button class="btn btn-primary btn-reservation">예약 취소</button>
+                                    <form action="reservation_cancel" method="post">{% csrf_token %}
+                                        <input type="hidden" id="reservation_id" name="reservation_id" value="{{reservation.id}}"></input>
+                                        <button type="submit"class="btn btn-primary btn-reservation">예약 취소</button>
+                                    </form>
                                 </div>
                                 <div class="tm-sidebar-pad-2">
                                     <ul class="reservation-body">

@@ -2,19 +2,28 @@ from django.shortcuts import render
 from .froms import TicketForm
 from .models import Ticket, Reservation
 from .services import AirService
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
-# Create your views here.
+# 예약 추가
 def reservation_add(request):
     context = AirService().reservation_add(request)
     if context == False:
         return render(request, 'user_app/login')
     return render(request, 'reservation_complete.html', context)
 
+# 예약 리스트 출력
 def reservation_list(request):
     context = AirService().reservation_list(request)
     if context == False:
         return render(request, 'user_app/login')
     return render(request, 'reservation_list.html', context)
+
+# 예약 삭제
+def reservation_cancel(request):
+    reservation_id = request.POST['reservation_id']
+    AirService().reservation_cancel(reservation_id)
+    return HttpResponseRedirect(reverse('reservation_list'))
 
 # 조건에 맞는 가는편 항공권 출력
 def searchList_go(request):

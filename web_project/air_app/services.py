@@ -67,3 +67,7 @@ class AirService:
         reservation_list = Reservation.objects.filter(user_id=user)
         context = {"reservation_list":reservation_list}
         return context
+
+    def reservation_cancel(self, reservation_id):
+        reservation = Reservation.objects.get(id=reservation_id)
+        reservation.delete()

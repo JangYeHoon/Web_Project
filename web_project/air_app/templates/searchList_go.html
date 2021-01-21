@@ -13,10 +13,9 @@
                                     <h3 class="tm-color-white tm-sidebar-title">가는편 선택|{{date_month}}월 {{date_day}}일</h3>
                                 </div>
                                 <div class="tm-sidebar-pad-2">
+                                    {% for airline in airline_list %}
                                     <ul class="searchList">
-                                       
                                         <li class="searchList-item">
-                                            {% for airline in airline_list %}
                                                 <div class="media-body tm-media-body tm-bg-gray">
                                                     <!-- <img src="{%static 'img/tn-img-01.jpg'%}" alt="Image"> -->
                                                     <img src="/media/air_img/{{airline.airline_id.air_img}}" alt="Image">
@@ -65,11 +64,9 @@
                                                         <button type="submit" class="btn btn-primary btn-searchList">선택</button>
                                                     </form>
                                                 </div>
-                                            {% endfor %}
                                         </li>
-
                                     </ul>
-                                   
+                                    {% endfor %}
                                 </div>
                             </div>                            
                         </div>
