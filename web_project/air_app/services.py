@@ -8,6 +8,8 @@ class AirService:
         seat = search_check.data['seat']
         adult = search_check.data['adult']
         children = search_check.data['children']
+        if children == '':
+            children = 0
         read_date = search_check.data['departure_data']
         date = read_date.split("-")
         context = {"airline_list":airline_list, "date_month":date[1], "date_day":date[2], "arrival_date":search_check.data['arrival_data'], "seat":seat, "adult":adult, "children":children}
