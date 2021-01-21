@@ -64,7 +64,7 @@
                                                 </div>  <!--항공사 로고 대체 -->
 
                                                 <div class="media-body tm-media-body tm-bg-gray ">
-                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.departure_time}} - {{airline.arrival_time}}</h4>
+                                                    <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.departure_time | date:'H:i'}} - {{airline.arrival_time | date:'H:i'}}</h4>
                                                     <p class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.departure_data | date:'n월 j일 (D)'}}</p>
                                                 </div>  
                                      
