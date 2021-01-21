@@ -53,6 +53,7 @@
                                                     {% endif %}
                                                 </div> 
                                                  <div class="media-body tm-media-body tm-bg-gray m">
+                                                     {% if section == 'round_trip' %}
                                                     <form action="searchList_come" method="post">{% csrf_token %}
                                                         <input type="hidden" id="go_id" name="go_id" value="{{airline.id}}"></input>
                                                         <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>
@@ -63,6 +64,17 @@
                                                         <input type="hidden" id="arrival_place" name="arrival_place" value="{{airline.departure_place}}"></input>
                                                         <button type="submit" class="btn btn-primary btn-searchList">선택</button>
                                                     </form>
+                                                    {% endif %}
+                                                    {% if section == 'one_way' %}
+                                                    <form action="reservation_add" method="post">{% csrf_token %}
+                                                        <input type="hidden" id="go_id" name="go_id" value="{{airline.id}}"></input>
+                                                        <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>
+                                                        <input type="hidden" id="adult" name="adult" value="{{adult}}"></input>
+                                                        <input type="hidden" id="children" name="children" value="{{children}}"></input>
+                                                        <input type="hidden" id="section" name="section" value="{{section}}"></input>
+                                                        <button type="submit" class="btn btn-primary btn-searchList">예약</button>
+                                                    </form>
+                                                    {% endif %}
                                                 </div>
                                         </li>
                                     </ul>

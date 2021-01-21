@@ -55,6 +55,7 @@
                                                     </table>
                                                     <h2 class="text-uppercase tm-font-semibold ">총 금액 {{new_reservation.price | intcomma}}원</h2>
                                                 </div>
+                                                {% if reservation.come_ticket_id != None %}
                                                 <div class="media-body tm-media-body ">
                                                     <table>
                                                         <tr>
@@ -92,6 +93,7 @@
                                                         </tr>
                                                     </table>
                                                 </div> 
+                                                {% endif %}
                                                 <a class="btn btn-primary tm-btn-search" href="/">Home</a>
                                         </li>
                                     </ul>
