@@ -52,6 +52,7 @@ $(function(){
     
     // Slick carousel
     setCarousel();
+
     $(window).resize(function() {
     setCarousel();
    
@@ -92,11 +93,12 @@ function searchCheck(){
        window.alert("가는날짜 입력 필수")
        return false;
    }
-   else if(document.getElementById('round').value == 1 && document.getElementById('arrival_data').value == ""){
+   else if(document.getElementById('section').value == "round_trip" && document.getElementById('arrival_data').value == ""){
+       alert("오는날짜")
        window.alert("오는 입력 필수")
        return false;
    }
-   else if(document.getElementById('adult').value == "" && document.getElementById('children')){
+   else if(document.getElementById('adult').value == "" && document.getElementById('children') == ""){
        window.alert("인원수 입력 필수")
        return false;
    }
