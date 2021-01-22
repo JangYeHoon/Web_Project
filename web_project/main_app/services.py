@@ -1,11 +1,23 @@
 from django.core.exceptions import ObjectDoesNotExist
-from air_app.models import Ticket
-from air_app.models import Reservation
+from air_app.models import Ticket, Reservation, Airline
+from django.db.models import Model, Min
 
 class MainService:
     def searchPlace(self):
+        # 항공권 검색시 티켓이 있는 장소 검색
         departure_place_list= Ticket.objects.all().values('departure_place').distinct().order_by('departure_place')
         arrival_place_list = Ticket.objects.all().values('arrival_place').distinct().order_by('arrival_place')
+
+        # 인기 항공권
+        ranking_list = self.popular_ticket()
+        
+        # 항공사별 특가 티켓
+        tickets, airline_list = self.specials_tickets()
+
+        context ={"departure_place_list":departure_place_list,"arrival_place_list":arrival_place_list, "ranking_list":ranking_list, "tickets":tickets, "airline_list":airline_list}
+        return context   
+
+    def popular_ticket(self):
         reservation_list = Reservation.objects.filter(come_ticket_id__isnull=False)
         dic = {}
         dic_place = {}
@@ -27,5 +39,10 @@ class MainService:
             for place_key in dic_place:
                 if place_key == key[0]:
                     ranking_list.append(dic_place.get(place_key))
-        context ={"departure_place_list":departure_place_list,"arrival_place_list":arrival_place_list, "ranking_list":ranking_list}
-        return context
+        return ranking_list
+
+    def specials_tickets(self):
+        tickets = Ticket.objects.values('airline_id_id', 'departure_place', 'arrival_place').annotate(Min('economy_price')).values('airline_id_id', 'departure_place', 'arrival_place', 'departure_data', 'economy_price')
+        airline = Airline.objects.all()
+
+        return tickets, airline

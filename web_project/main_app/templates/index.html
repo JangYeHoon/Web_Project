@@ -125,8 +125,24 @@
                                 {% endfor %}
                             </div>
                         </div>
-
-                      
+                    </div>
+                </div>
+            </div>
+            <div class="tm-section tm-section-pad tm-bg-gray" id="tm-section-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            {% for airline in airline_list %}
+                                <h1>{{airline.name}}</h1>
+                                {% for ticket in tickets %}
+                                    {% if ticket.airline_id_id == airline.id %}
+                                        <p>{{ticket.departure_place}} -&gt {{ticket.arrival_place}}</p>
+                                        <p>{{ticket.departure_data | date:'n월 j일 (D)'}}</p>
+                                        <p>{{ticket.economy_price}}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
