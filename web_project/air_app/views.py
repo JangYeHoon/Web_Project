@@ -9,14 +9,14 @@ from django.urls import reverse
 def reservation_add(request):
     context = AirService().reservation_add(request)
     if context == False:
-        return render(request, 'user_app/login')
+        return HttpResponseRedirect('/user_app/login')
     return render(request, 'reservation_complete.html', context)
 
 # 예약 리스트 출력
 def reservation_list(request):
     context = AirService().reservation_list(request)
     if context == False:
-        return render(request, 'user_app/login')
+        return HttpResponseRedirect('/user_app/login')
     return render(request, 'reservation_list.html', context)
 
 # 예약 삭제
