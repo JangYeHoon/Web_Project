@@ -128,24 +128,37 @@
                     </div>
                 </div>
             </div>
-            <div class="tm-section tm-section-pad tm-bg-gray" id="tm-section-2">
+            <div class="tm-section-2">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="col text-center">
+                            <h4 class="tm-section-title">주요 항공사별 특가</h4>
                             {% for airline in airline_list %}
-                                <h1>{{airline.name}}</h1>
-                                {% for ticket in tickets %}
-                                    {% if ticket.airline_id_id == airline.id %}
-                                        <p>{{ticket.departure_place}} -&gt {{ticket.arrival_place}}</p>
-                                        <p>{{ticket.departure_data | date:'n월 j일 (D)'}}</p>
-                                        <p>{{ticket.economy_price}}</p>
-                                    {% endif %}
-                                {% endfor %}
+                            <p href="" class="tm-color-white tm-btn-white-bordered" id="{{airline.id}}" onclick="airlineSelected(this.id)">{{airline.name}}</p>
                             {% endfor %}
-                        </div>
+                        </div>                
                     </div>
+                </div>        
+            </div>
+            
+            <div class="tm-section tm-position-relative">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" class="tm-section-down-arrow">
+                    <polygon fill="#ee5057" points="0,0  100,0  50,60"></polygon>                   
+                </svg> 
+                <div class="container tm-pt-5 tm-pb-4">
+                    <div class="row text-center" id="special_ticket">
+                            {% for ticket in tickets %}
+                            <article class='col-sm-6 col-md-4 col-lg-3 col-xl-3 tm-article '>                            
+                                <h4 class="tm-color-primary tm-article-title-1">{{ticket.departure_place}} -&gt {{ticket.arrival_place}}</h4>
+                                <p class="tm-article-content">{{ticket.departure_data | date:'n월 j일 (D)'}}</p>
+                                <a href="#" class="text-uppercase tm-color-primary tm-font-semibold  tm-article-price">최저가 {{ticket.economy_price}}원</a>
+                            </article>
+                            {% endfor %}
+                    </div>        
                 </div>
             </div>
+
+
 {%endblock content%}
 {%block script%}
             <script src="{%static 'js/index-js.js'%}"></script>

@@ -1,3 +1,32 @@
+
+function airlineSelected(self){
+    airline_id = self;
+    result = "";
+    $.ajax({
+        url:"specials_tickets",
+        data:{
+            'airline_id':airline_id
+        },
+        datatype : 'json',
+        success:function(resultData){
+
+            for(let i=0;i<resultData.length;i++){
+                result +=" <article class='col-sm-6 col-md-4 col-lg-3 col-xl-3 tm-article'> ";
+                result +="<h4 class='tm-color-primary tm-article-title-1'>" +resultData[i].departure_place+" -> " +resultData[i].arrival_place +"</h4>";
+                result +="<p class='tm-article-content'>" +resultData[i].departure_data+"</p>";
+                result +="<a href='#' class='text-uppercase tm-color-primary tm-font-semibold  tm-article-price'>최저가" +resultData[i].economy_price+ "원</a>";
+                result += " </article>";
+            }
+            
+            $('#special_ticket').html(result);
+            
+        },
+        error : function(){
+            alert('ajax요청 실패');
+        }
+
+    })
+}
 function setCarousel(){
                     
     if ($('#tm-article-carousel').hasClass('slick-initialized')) {
@@ -74,7 +103,7 @@ $(function(){
 
     // Update the current year in copyright
     $('.tm-current-year').text(new Date().getFullYear()); 
-
+     
 })
 
 
@@ -94,8 +123,7 @@ function searchCheck(){
        return false;
    }
    else if(document.getElementById('section').value == "round_trip" && document.getElementById('arrival_data').value == ""){
-       alert("오는날짜")
-       window.alert("오는 입력 필수")
+       window.alert("오는날짜 입력 필수")
        return false;
    }
    else if(document.getElementById('adult').value == "" && document.getElementById('children') == ""){

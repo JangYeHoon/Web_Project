@@ -46,7 +46,7 @@ def id_overlap_check(request):
     email = request.GET.get('email')
 
     user = UserService().id_overlap_check(email)
-    print(user)
+
     if user is None:
         overlap = "pass"
     else:

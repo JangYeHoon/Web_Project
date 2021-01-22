@@ -171,9 +171,20 @@ p {
 	 color: #d53239;
  }
  .signup_check{
-	 margin-left:10px
+	 margin-left:10px;
  }
 
+ .tm-article-content{
+	 font-size: 1rem;
+ }
+
+ .tm-article-price{
+	 font-size: 1.3rem;
+ }
+ .section-specialPrice-airline{
+	 background-color: antiquewhite;
+	 color:#ee5057;
+ }
 /*by.jaein*/
 .navbar { 
 	width: 100%; 
@@ -390,7 +401,7 @@ select.tm-select::-ms-expand { display: none; }
 
 .tm-section-title {
 	color: white;
-	font-size: 3rem;
+	font-size: 2rem;
 }
 
 .tm-section-title-2 {
@@ -412,6 +423,11 @@ select.tm-select::-ms-expand { display: none; }
 	border: 2px solid white;
 	background: transparent;
 	text-transform: uppercase;
+	cursor: pointer;
+}
+.tm-btn-white-bordered-focus{
+	color: #ee5057;
+	background: white;
 }
 
 .tm-btn-white-bordered:hover,

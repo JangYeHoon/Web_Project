@@ -12,7 +12,8 @@ class MainService:
         ranking_list = self.popular_ticket()
         
         # 항공사별 특가 티켓
-        tickets, airline_list = self.specials_tickets()
+        airline_list =self.specials_tickets_airline()
+        tickets= self.specials_tickets(airline_list[0].id)
 
         context ={"departure_place_list":departure_place_list,"arrival_place_list":arrival_place_list, "ranking_list":ranking_list, "tickets":tickets, "airline_list":airline_list}
         return context   
@@ -41,8 +42,11 @@ class MainService:
                     ranking_list.append(dic_place.get(place_key))
         return ranking_list
 
-    def specials_tickets(self):
-        tickets = Ticket.objects.values('airline_id_id', 'departure_place', 'arrival_place').annotate(Min('economy_price')).values('airline_id_id', 'departure_place', 'arrival_place', 'departure_data', 'economy_price')
-        airline = Airline.objects.all()
+    def specials_tickets_airline(self):
+         airline = Airline.objects.all()
 
-        return tickets, airline
+         return airline
+
+    def specials_tickets(self, airline_id):
+        tickets = Ticket.objects.filter(airline_id_id=airline_id).values('airline_id_id', 'departure_place', 'arrival_place').annotate(Min('economy_price')).values('airline_id_id', 'departure_place', 'arrival_place', 'departure_data', 'economy_price')
+        return tickets
