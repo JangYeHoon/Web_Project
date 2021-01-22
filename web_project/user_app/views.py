@@ -24,8 +24,13 @@ def loginCheck(request):
     user_pw = request.POST['password']
     result = UserService().loginCheck(user_id, user_pw)
     if result == True:
+        forward_reservaion = request.POST['forward_reservaion']
         request.session['login_id'] = user_id
-        return HttpResponseRedirect('/')
+        if forward_reservaion == '1':
+            context = UserService().reservation_login(user_id, request)
+            return render(request, 'reservation_complete.html', context)
+        else:
+            return HttpResponseRedirect('/')
     else:
         messages.add_message(request, messages.INFO, '등록된 ID가 없거나 비밀번호가 다릅니다.')
         return render(request, 'login.html')

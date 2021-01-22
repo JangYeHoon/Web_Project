@@ -7,9 +7,9 @@ from django.urls import reverse
 
 # 예약 추가
 def reservation_add(request):
-    context = AirService().reservation_add(request)
-    if context == False:
-        return HttpResponseRedirect('/user_app/login')
+    context, user_check = AirService().reservation_add(request)
+    if user_check == False:
+        return render(request, 'login.html', context)
     return render(request, 'reservation_complete.html', context)
 
 # 예약 리스트 출력
