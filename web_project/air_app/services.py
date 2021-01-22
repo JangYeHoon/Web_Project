@@ -29,10 +29,11 @@ class AirService:
 
     def reservation_add(self, request):
         user_id = request.session.get('login_id')
-        user_check = False
+        check_user = False
         if user_id:
             user = User.objects.get(email=user_id)
-            user_check = True
+            check_user = True
+        
         go_airline_id = request.POST['go_id']
         go_airline = Ticket.objects.get(id=go_airline_id)
 
@@ -60,7 +61,7 @@ class AirService:
                 go_price = go_airline.first_class_price
                 come_price = come_airline.first_class_price
             price = (go_price + come_price) * int(adult) + ((go_price + come_price) * 0.9) * int(children)
-            if user_check == True:
+            if check_user == True:
                 new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=come_airline, price=price)
         elif section == 'one_way':
             if seat == '1':
@@ -72,9 +73,9 @@ class AirService:
             elif seat == '4':
                 go_price = go_airline.first_class_price
             price = go_price * int(adult) + (go_price * 0.9) * int(children)
-            if user_check == True:
+            if check_user == True:
                 new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=None, price=price)
-        if user_check == True:
+        if check_user == True:
             new_reservation.save()
             context = {"new_reservation":new_reservation}
         else:
@@ -82,8 +83,7 @@ class AirService:
                 context = {"go_ticket_id":go_airline_id, "come_ticket_id":come_airline_id, "price":price, "section":section}
             elif section == 'one_way':
                 context = {"go_ticket_id":go_airline_id, "price":price, "section":section}
-
-        return context, user_check
+        return context, check_user
 
     def reservation_list(self, request):
         user_id = request.session.get('login_id')
