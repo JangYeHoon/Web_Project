@@ -40,4 +40,26 @@ $(document).ready(function(){
 
     // Update the current year in copyright
     $('.tm-current-year').text(new Date().getFullYear());                           
+
+    //날짜 재검색 부분
+    $('#selectedDate').hide();
+
+    $('#dateIcon').click(function(){
+        $('#selectedDate').show();
+        $('#selectedDate').focus();
+    })
+
+   $('#selectedDate').datepicker({
+       dateFormat:"yy-mm-dd",
+       onSelect:function(dateText,inst){
+           $('#departure_data').val(dateText);
+           $('#selectedDate').hide();
+            $('#research').submit();
+       }
+   });
+
+   $('#selectedDate').blur(function(){
+       $('#selectedDate').hide();
+   })
+
 });

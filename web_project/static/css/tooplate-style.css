@@ -42,7 +42,8 @@ a:focus {
 .tm-section-pad { padding: 30px 50px; }
 .tm-section-pad-2 { padding: 30px 40px; }
 .tm-article-pad { padding: 28px; }
-.tm-sidebar-pad { padding: 15px 20px; }
+.tm-sidebar-pad { padding: 15px 20px; 
+display: flex;}
 .tm-sidebar-pad-2 { padding: 21px 20px; }
 .tm-pad { padding: 20px; }
 
@@ -185,6 +186,17 @@ p {
 	 background-color: antiquewhite;
 	 color:#ee5057;
  }
+ .tm-search-list-icon{
+	 color: #F4F4F4;
+ }
+
+.btn-search{
+	display:none;
+}
+#dateIcon{
+	color: #F4F4F4;
+	padding-left: 10px;
+}
 /*by.jaein*/
 .navbar { 
 	width: 100%; 
@@ -476,6 +488,9 @@ select.tm-select::-ms-expand { display: none; }
 .tm-sidebar-title {
 	font-size: 1.3rem;
 	margin-bottom: 5px;
+	text-align: center;
+	display: flex;
+    justify-content: space-between;
 }
 
 .tm-sidebar-item-title {

@@ -137,7 +137,7 @@ function searchCheck(){
        window.alert("오는날짜 입력 필수")
        return false;
    }
-   else if(document.getElementById('adult').value == "" && document.getElementById('children') == ""){
+   else if(document.getElementById('adult').value == 0 && document.getElementById('children') == 0){
        window.alert("인원수 입력 필수")
        return false;
    }
