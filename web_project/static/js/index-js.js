@@ -124,21 +124,18 @@ function searchCheck(){
    if(document.getElementById('departureCity').value == ""){
        window.alert("출발지 입력 필수")
        return false;
-   }
-   else if(document.getElementById('arrivalCity').value == ""){
+   }else if(document.getElementById('arrivalCity').value == ""){
        window.alert("도착지 입력 필수")
        return false;
-   }
-   else if(document.getElementById('departure_data').value == ""){
+   }else if(document.getElementById('departure_data').value == ""){
        window.alert("가는날짜 입력 필수")
        return false;
-   }
+    }else if(document.getElementById('adult').value == 0 && document.getElementById('children').value == 0){
+        window.alert("인원수 입력 필수")
+        return false;
+    }
    else if(document.getElementById('section').value == "round_trip" && document.getElementById('arrival_data').value == ""){
        window.alert("오는날짜 입력 필수")
-       return false;
-   }
-   else if(document.getElementById('adult').value == 0 && document.getElementById('children') == 0){
-       window.alert("인원수 입력 필수")
        return false;
    }
    else if(document.getElementById('seat').value == ""){
