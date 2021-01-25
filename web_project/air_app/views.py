@@ -7,6 +7,8 @@ from django.urls import reverse
 
 # 예약 추가
 def reservation_add(request):
+    if not request.session.get('login_id') :
+        return HttpResponseRedirect('/user_app/login')
     context, check_user = AirService().reservation_add(request)
     if check_user == False:
         return render(request, 'login', context)
