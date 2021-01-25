@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .froms import TicketForm
+from .forms import TicketForm
 from .models import Ticket, Reservation
 from .services import AirService
 from django.http import HttpResponseRedirect

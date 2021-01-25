@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'main_app',
     'air_app',
     'user_app',
+    'board_app',
 ]
 
 MIDDLEWARE = [

@@ -24,6 +24,7 @@ urlpatterns = [
     path('main_app/', include('main_app.urls'), name='main_app'),
     path('air_app/', include('air_app.urls'), name='air_app'),
     path('user_app/', include('user_app.urls'), name='user_app'),
+    path('board_app/', include('board_app.urls'), name='board_app'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
