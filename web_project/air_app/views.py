@@ -31,6 +31,11 @@ def searchList_go(request):
     context = AirService().searchList_go(search_check)
     return render(request, 'searchList_go.html', context)
 
+def searchList_go_get(request):
+    search_check = TicketForm(request.GET)
+    context = AirService().searchList_go(search_check)
+    return render(request, 'searchList_go.html', context)
+
 # 조건에 맞는 오는편 항공권 출력
 def searchList_come(request):
     search_check = TicketForm(request.POST)

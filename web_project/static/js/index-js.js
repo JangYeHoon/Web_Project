@@ -14,7 +14,18 @@ function airlineSelected(self){
                 result +=" <article class='col-sm-6 col-md-4 col-lg-3 col-xl-3 tm-article'> ";
                 result +="<h4 class='tm-color-primary tm-article-title-1'>" +resultData[i].departure_place+" -> " +resultData[i].arrival_place +"</h4>";
                 result +="<p class='tm-article-content'>" +resultData[i].departure_data+"</p>";
-                result +="<a href='#' class='text-uppercase tm-color-primary tm-font-semibold  tm-article-price'>최저가" +resultData[i].economy_price+ "원</a>";
+                result +="<a href='#' class='text-uppercase tm-color-primary tm-font-semibold  tm-article-price'>최저가 : " +resultData[i].economy_price+ "원</a>";
+                result += "<form action='air_app/searchList_go_get' method='get'>"
+                result += "<input type='hidden' id='departure_place' name='departure_place' value=" + resultData[i].departure_place + "></input>"
+                result += "<input type='hidden' id='arrival_place' name='arrival_place' value=" + resultData[i].arrival_place + "></input>"
+                result += "<input type='hidden' id='departure_data' name='departure_data' value=" + resultData[i].departure_data + "></input>"
+                result += "<input type='hidden' id='arrival_data' name='arrival_data' value=" + resultData[i].departure_data + "></input>"
+                result += "<input type='hidden' id='adult' name='adult' value='1'></input>"
+                result += "<input type='hidden' id='children' name='children' value=''></input>"
+                result += "<input type='hidden' id='seat' name='seat' value='1'></input>"
+                result += "<input type='hidden' id='section' name='section' value='one_way'></input>"
+                result += "<button type='submit' class='text-uppercase btn-primary tm-btn-primary'>검색</a>"
+                result += "</form>"
                 result += " </article>";
             }
             
