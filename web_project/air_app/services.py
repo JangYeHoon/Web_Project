@@ -13,7 +13,7 @@ class AirService:
         section = search_check.data['section']
         read_date = search_check.data['departure_data']
         date = read_date.split("-")
-        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'] ,"date_month":date[1], "date_day":date[2], "arrival_date":search_check.data['arrival_data'],'departure_data':read_date, "seat":seat, "adult":adult, "children":children, "section":section}
+        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'] ,"date_month":date[1], "date_day":date[2], "arrival_date":search_check.data['arrival_data'], "seat":seat, "adult":adult, "children":children, "section":section}
         return context
 
     def searchList_come(self, search_check):
