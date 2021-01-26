@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{% load static %}
+{% load humanize %}
+{%block content%}
+<div>
+<h3>{{board.title}}</h3>
+<p>{{board.contents}}</p>
+<p>{{board.read_count}}</p>
+<form action="board_modify_input" method="post">{% csrf_token %}
+    <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+    <button type='submit' class='text-uppercase btn-primary tm-btn-primary'>수정</a>
+</form>
+<form action="board_delete" method="post">{% csrf_token %}
+    <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+    <button type='submit' class='text-uppercase btn-primary tm-btn-primary'>삭제</a>
+</form>
+</div>
+{%endblock content%}

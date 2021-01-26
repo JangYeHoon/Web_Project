@@ -1,0 +1,15 @@
+{%extends "base.html"%}
+{% load static %}
+{% load humanize %}
+{%block content%}
+<form action="board_add" method="post">{% csrf_token %}
+    <select name="board_name" class="form-control tm-select" id="board_name">
+        <option value="0">분류</option>
+        <option value="1">여행후기</option>
+        <option value="2">고객센터</option>
+    </select>
+    <input type="text" id="title" name="title" placeholder="제목"></input><br>
+    <textarea cols="50" rows="20" id="contents" name="contents" placeholder="내용"></textarea>
+    <button type="submit" class="btn btn-primary btn-searchList">등록</button>
+</form>
+{%endblock content%}

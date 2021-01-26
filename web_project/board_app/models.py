@@ -7,7 +7,7 @@ class Board(models.Model):
     board_name = models.CharField(max_length=30)
     title = models.CharField(max_length=30)
     board_writer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="board_writer")
-    read_conut = models.IntegerField()
+    read_count = models.IntegerField()
     write_date = models.DateTimeField()
     contents = models.TextField()
     group = models.IntegerField()
