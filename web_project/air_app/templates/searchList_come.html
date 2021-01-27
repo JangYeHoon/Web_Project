@@ -68,9 +68,9 @@
                                 </div>
                                 <div class="tm-sidebar-pad-2">
                                     <ul class="searchList">
-                                       
+                                        {% for airline in airline_list%}
                                         <li class="searchList-item">
-                                            {% for airline in airline_list%}
+                                            
                                                 <div class="media-body tm-media-body tm-bg-gray">
                                                     <img src="/media/air_img/{{airline.airline_id.air_img}}" alt="Image">
                                                     <p class="text-uppercase tm-font-semibold tm-sidebar-item-title">{{airline.airline_id.name}}</p>
@@ -118,9 +118,9 @@
                                                         <button type="submit" class="btn btn-primary btn-searchList">예약</button>
                                                     </form>
                                                 </div>
-                                            {% endfor %}
+                                            
                                         </li>
-
+                                        {% endfor %}
                                     </ul>
                                    
                                 </div>
