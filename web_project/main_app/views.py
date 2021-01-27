@@ -9,9 +9,7 @@ def indexViews(request):
 
 def specials_tickets(request):
     airline_id = request.GET.get('airline_id')
-    print(airline_id)
 
     tickets = MainService().specials_tickets(airline_id)
-    result = list(tickets.values())
-   
+    result = tickets
     return JsonResponse(result,safe=False)

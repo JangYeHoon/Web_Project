@@ -155,8 +155,8 @@
                                 <form action="air_app/searchList_go" method="post">{% csrf_token %}
                                     <input type="hidden" id="departure_place" name="departure_place" value="{{ticket.departure_place}}"></input>
                                     <input type='hidden' id='arrival_place' name='arrival_place' value='{{ticket.arrival_place}}'></input>
-                                    <input type='hidden' id='departure_data' name='departure_data' value='{{ticket.departure_data | date:'Y-m-d'}}'></input>
-                                    <input type='hidden' id='arrival_data' name='arrival_data' value='{{ticket.departure_data | date:'Y-m-d'}}'></input>
+                                    <input type='hidden' id='departure_data' name='departure_data' value="{{ticket.departure_data | date:'Y-m-d'}}"></input>
+                                    <input type='hidden' id='arrival_data' name='arrival_data' value="{{ticket.departure_data | date:'Y-m-d'}}"></input>
                                     <input type='hidden' id='adult' name='adult' value='1'></input>
                                     <input type='hidden' id='children' name='children' value=''></input>
                                     <input type='hidden' id='seat' name='seat' value='1'></input>

@@ -48,5 +48,13 @@ class MainService:
          return airline
 
     def specials_tickets(self, airline_id):
-        tickets = Ticket.objects.filter(airline_id_id=airline_id).values('airline_id_id', 'departure_place', 'arrival_place').annotate(Min('economy_price')).values('airline_id_id', 'departure_place', 'arrival_place', 'departure_data', 'economy_price')
+        tickets_pair = Ticket.objects.filter(airline_id_id=airline_id).values('departure_place', 'arrival_place').annotate(min_economy=Min('economy_price')).values('departure_place', 'arrival_place', 'min_economy')
+        tickets_all = Ticket.objects.all()
+
+        tickets = []
+        for pair in tickets_pair:
+            for ticket in tickets_all:
+                if pair.get('departure_place') == ticket.departure_place and pair.get('arrival_place') == ticket.arrival_place and pair.get('min_economy') == ticket.economy_price:
+                    tickets.append({'departure_place':ticket.departure_place, 'arrival_place':ticket.arrival_place, 'departure_data':ticket.departure_data, 'economy_price':ticket.economy_price})
+                    break
         return tickets
