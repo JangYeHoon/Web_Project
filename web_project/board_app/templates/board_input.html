@@ -35,7 +35,7 @@
                         {% if request.session.login_id == 'admin@admin.com' %}
                         <input type="hidden" id="board_id" name="board_id" value="{{board_id}}"></input>
                         {% endif %}
-                        <button type="submit" class="btn btn-primary btn-board-content">등록</button>
+                        <button type="submit" class="btn btn-primary btn-board-content" onclick="return addCheck()">등록</button>
                     </form>
                 </div>
             </div>
@@ -43,3 +43,6 @@
     </div>
 </div>
 {%endblock content%}
+{%block script%}
+            <script src="{%static 'js/board-js.js'%}"></script>
+{%endblock script%}

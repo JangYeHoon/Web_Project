@@ -59,3 +59,22 @@ $(document).ready(function(){
         form.submit();
     }
 });
+
+function addCheck()
+{
+    if (document.getElementById('board_name').value == '0')
+    {
+        window.alert("말머리 입력 필수");
+        return false;
+    }
+    else if (document.getElementById('title').value == '')
+    {
+        window.alert("제목 입력 필수");
+        return false;
+    }
+    else if (document.getElementById('contents').value == '')
+    {
+        window.alert("내용 입력 필수");
+        return false;
+    }
+}
