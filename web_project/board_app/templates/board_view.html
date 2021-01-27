@@ -21,9 +21,12 @@
                     </article>
                     <article class="board_view_bottom">
                         <a href="board_list" class="text-uppercase tm-color-primary tm-font-semibold">목록</a>
-                        {% if writer_check == "1" %}
+                        {% if writer_check == "1" or writer_check == "2"%}
                         <a href="javascript:boardContentsMD('mod')" class="text-uppercase tm-color-primary tm-font-semibold">수정</a>
                         <a href="javascript:boardContentsMD('del')" class="text-uppercase tm-color-primary tm-font-semibold">삭제</a>
+                        {% endif %}
+                        {% if writer_check == "2" %}
+                        <a href="javascript:boardContentsMD('reply')" class="text-uppercase tm-color-primary tm-font-semibold">답글</a>
                         {% endif %}
                         <form action="board_delete" method="post" name="board_contents_md">{% csrf_token %}
                             <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>

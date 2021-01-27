@@ -53,6 +53,8 @@ $(document).ready(function(){
             form.action = "board_delete";
         }else if( route == "mod"){
             form.action = "board_modify_input";
+        } else if (route == "reply") {
+            form.action = "board_input";
         }
         form.submit();
     }

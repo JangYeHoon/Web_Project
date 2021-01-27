@@ -10,7 +10,12 @@ def board_list(request):
     return render(request, 'board_list.html', content)
 
 def board_input(request):
-    return render(request, 'board_input.html')
+    user_id = request.session.get('login_id')
+    if user_id == 'admin@admin.com':
+        content = BoardService().board_input(request)
+        return render(request, 'board_input.html', content)
+    else:
+        return render(request, 'board_input.html')
 
 def board_add(request):
     input_value = BoardForm(request.POST)

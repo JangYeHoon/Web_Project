@@ -21,17 +21,20 @@
                         </div>
                         <div class="form-group board_content_middle">
                             <h3 class="tm-color-primary tm-article-title-2"> 제목</h3>
-                            <input type="text" id="title" class="form-control" name="title" placeholder="제목"
-                            placeholder="제목"></input>
+                            {% if request.session.login_id == 'admin@admin.com' %}
+                            <input type="text" id="title" class="form-control" name="title" value="{{title}}"></input>
+                            {% else %}
+                            <input type="text" id="title" class="form-control" name="title" placeholder="제목"></input>
+                            {% endif %}
                         </div>
                         <div class="form-group board_content_middle">
                             <h3 class="tm-color-primary tm-article-title-2"> 내용</h3>
                             <textarea cols="100" rows="10" id="contents" name="contents" class="form-control"
                                 placeholder="내용"></textarea>
                         </div>
-
-
-
+                        {% if request.session.login_id == 'admin@admin.com' %}
+                        <input type="hidden" id="board_id" name="board_id" value="{{board_id}}"></input>
+                        {% endif %}
                         <button type="submit" class="btn btn-primary btn-board-content">등록</button>
                     </form>
                 </div>

@@ -28,8 +28,13 @@
 
                             {% for board in board_list %}
                             <tr>
-                                <td>{{board.id}}</td>
-                                <td>{{board.board_name}}</td>
+                                {% if board.depth == '0' %}
+                                    <td>{{board.id}}</td>
+                                    <td>{{board.board_name}}</td>
+                                {% else %}
+                                    <td></td>
+                                    <td>-></td>
+                                {% endif %}
                                 <td><a href='javascript:formSubmit({{board.id}})'>{{board.title}}</a></td>
                                 <td>{{board.board_writer.name_ko}}</td>
                                 <td>{{board.write_date}}</td>
@@ -39,9 +44,11 @@
                         </tbody>
                     </table>
 
+                    {% if request.session.login_id %}
                     <div>
                         <a href="board_input" class="text-uppercase tm-color-primary tm-font-semibold">작성</a>
                     </div>
+                    {% endif %}
                 </form>
             </div>
         </div>
