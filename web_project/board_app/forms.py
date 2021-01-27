@@ -10,4 +10,4 @@ class BoardForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = {'product_title', 'comment_writer', 'write_time', 'contents', 'c_list', 'c_level'}
+        fields = {'comment_writer', 'write_time', 'contents', 'c_list', 'c_level'}

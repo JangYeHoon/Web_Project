@@ -19,11 +19,8 @@ def board_input(request):
 
 def board_add(request):
     input_value = BoardForm(request.POST)
-    login_check = BoardService().board_add(request, input_value)
-    if login_check == True:
-        return HttpResponseRedirect(reverse('board_list'))
-    else:
-        return render(request, 'login.html')
+    BoardService().board_add(request, input_value)
+    return HttpResponseRedirect(reverse('board_list'))
 
 def board_view(request):
     content = BoardService().board_view(request)

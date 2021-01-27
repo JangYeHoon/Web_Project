@@ -15,8 +15,8 @@ class Board(models.Model):
 
 class Comment(models.Model):
     objects = models.Manager()
-    product_title = models.CharField(max_length=40)
     comment_writer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comment_writer")
+    board_id = models.ForeignKey(Board, on_delete=models.CASCADE, related_name="board_id")
     write_time = models.DateTimeField()
     contents = models.TextField()
     c_list = models.IntegerField()

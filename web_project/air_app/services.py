@@ -103,17 +103,17 @@ class AirService:
     def db_insert(self):
         airline_id = 1
         for i in range(1, 11, 1):
-            # hour = random.randint(7, 21)
-            # minute = random.randint(0, 50)
-            # start_time = str(hour) + ":" + str(minute)
-            # end_time = str(hour+1) + ":" + str(minute+5)
-            # first_price = random.randint(180000, 200000)
-            # business_price = random.randint(150000, 180000)
-            # premium_price = random.randint(110000, 150000)
-            # economy_price = random.randint(70000, 110000)
-            # new_ticket = Ticket(airline_id_id=airline_id, departure_place='제주', arrival_place='서울', departure_airport='CJU', arrival_airport='GMP',
-            # departure_time=start_time, arrival_time=end_time, departure_data='2021-02-04', first_class_price=first_price, business_class_price=business_price,
-            # premium_price=premium_price, economy_price=economy_price)
+            hour = random.randint(7, 21)
+            minute = random.randint(0, 50)
+            start_time = str(hour) + ":" + str(minute)
+            end_time = str(hour+1) + ":" + str(minute+5)
+            first_price = random.randint(180000, 200000)
+            business_price = random.randint(150000, 180000)
+            premium_price = random.randint(110000, 150000)
+            economy_price = random.randint(70000, 110000)
+            new_ticket = Ticket(airline_id_id=airline_id, departure_place='서울', arrival_place='제주', departure_airport='GMP', arrival_airport='CJU',
+            departure_time=start_time, arrival_time=end_time, departure_data='2021-01-29', first_class_price=first_price, business_class_price=business_price,
+            premium_price=premium_price, economy_price=economy_price)
 
             # hour = random.randint(7, 21)
             # minute = random.randint(5, 55)
@@ -123,21 +123,22 @@ class AirService:
             # business_price = random.randint(750000, 800000)
             # premium_price = random.randint(700000, 750000)
             # economy_price = random.randint(650000, 700000)
-            # new_ticket = Ticket(airline_id_id=airline_id, departure_place='상하이', arrival_place='서울', departure_airport='PVG', arrival_airport='ICN',
-            # departure_time=start_time, arrival_time=end_time, departure_data='2021-02-04', first_class_price=first_price, business_class_price=business_price,
+            # new_ticket = Ticket(airline_id_id=airline_id, departure_place='서울', arrival_place='상하이', departure_airport='ICN', arrival_airport='PVG',
+            # departure_time=start_time, arrival_time=end_time, departure_data='2021-01-29', first_class_price=first_price, business_class_price=business_price,
             # premium_price=premium_price, economy_price=economy_price)
 
-            hour = random.randint(7, 21)
-            minute = random.randint(0, 40)
-            start_time = str(hour) + ":" + str(minute)
-            end_time = str(hour+2) + ":" + str(minute+15)
-            first_price = random.randint(340000, 370000)
-            business_price = random.randint(320000, 340000)
-            premium_price = random.randint(300000, 320000)
-            economy_price = random.randint(260000, 300000)
-            new_ticket = Ticket(airline_id_id=airline_id, departure_place='도쿄', arrival_place='서울', departure_airport='NRT', arrival_airport='ICN',
-            departure_time=start_time, arrival_time=end_time, departure_data='2021-02-04', first_class_price=first_price, business_class_price=business_price,
-            premium_price=premium_price, economy_price=economy_price)
+            # hour = random.randint(7, 21)
+            # minute = random.randint(0, 40)
+            # start_time = str(hour) + ":" + str(minute)
+            # end_time = str(hour+2) + ":" + str(minute+15)
+            # first_price = random.randint(340000, 370000)
+            # business_price = random.randint(320000, 340000)
+            # premium_price = random.randint(300000, 320000)
+            # economy_price = random.randint(260000, 300000)
+            # new_ticket = Ticket(airline_id_id=airline_id, departure_place='서울', arrival_place='도쿄', departure_airport='ICN', arrival_airport='NRT',
+            # departure_time=start_time, arrival_time=end_time, departure_data='2021-01-29', first_class_price=first_price, business_class_price=business_price,
+            # premium_price=premium_price, economy_price=economy_price)
+
             new_ticket.save()
             if i % 2 == 0:
                 airline_id += 1
