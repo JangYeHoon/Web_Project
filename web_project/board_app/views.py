@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .forms import BoardForm
+from .forms import BoardForm,CommentForm
 from .services import BoardService
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.http import JsonResponse
 
 # Create your views here.
 def board_list(request):
@@ -38,3 +39,16 @@ def board_delete(request):
     board_id = request.POST['board_id']
     BoardService().board_delete(board_id)
     return HttpResponseRedirect(reverse('board_list'))
+
+def comment_add(request):
+    input_value =CommentForm(request.POST)
+    board_id = BoardService().comment_add(request,input_value)
+    return HttpResponseRedirect('board_view?board_id='+board_id)
+
+def loginStateCheck(request):
+    login =request.session.get('login_id')
+    if login is None:
+        state={'state':"logout"}
+    else :
+        state={'state':"login"}
+    return JsonResponse(state)

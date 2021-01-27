@@ -8,7 +8,7 @@
     <div class="container ie-h-align-center-fix">
         <div class="row tm-flex-align-center">
             <div class="col-xs-12 col-md-12 col-lg-10 col-xl-10 mt-0 mt-sm-3">
-                <form name="board" action="board_view" method="post">{% csrf_token %}
+                <form name="board" action="board_view" method="get">{% csrf_token %}
                     <input type="hidden" id="board_id" name="board_id" value="sss"></input>
                 </form>
                 <!--게시글 이동 폼-->

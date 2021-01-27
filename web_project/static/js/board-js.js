@@ -12,6 +12,39 @@ function setPageNav(){
         });   
     }
 }
+function loginStateCheck(){
+    $.ajax({
+        url:'loginStateCheck',
+        datatype: 'json',
+        success:function(data){
+           str = data["state"]+"";
+           if (str == "login"){
+                return $('#comment_add').submit();
+            }else{
+                alert("로그인이 필요합니다")
+                return false;
+            }
+        }
+    })
+}
+function addCheck()
+{
+    if (document.getElementById('board_name').value == '0')
+    {
+        window.alert("말머리 입력 필수");
+        return false;
+    }
+    else if (document.getElementById('title').value == '')
+    {
+        window.alert("제목 입력 필수");
+        return false;
+    }
+    else if (document.getElementById('contents').value == '')
+    {
+        window.alert("내용 입력 필수");
+        return false;
+    }
+}
 
 $(document).ready(function(){
 
@@ -58,23 +91,32 @@ $(document).ready(function(){
         }
         form.submit();
     }
+
+    recommentBoxOpen = function(commentId,boardId){
+        $.ajax({
+            url:'loginStateCheck',
+            datatype: 'json',
+            success:function(data){
+               str = data["state"]+"";
+               if (str == "login"){
+                var commentBox = "<input type='hidden' id='board_id' name='board_id' value='"+boardId+"'></input>";
+                    commentBox += "<input type='hidden' id='c_list' name='c_list' value='"+commentId+"'></input>";
+                    commentBox += "<input type='hidden' id='c_level' name='c_level' value='1'></input>";
+                    commentBox += "<textarea class='form-control' id='comment_contents' name='comment_contents' rows='2' placeholder='What are you thinking?'>";
+                    commentBox += "</textarea>";
+                    commentBox += "<div class='mar-top clearfix'>";
+                    commentBox += " <button class='btn btn-sm btn-primary pull-right' type='submit'>";
+                    commentBox += " <i class='fa fa-pencil fa-fw'></i> 등록</button>";
+                    commentBox += " </div>";
+                   
+                document.getElementById("recomment-box-"+commentId).innerHTML=commentBox;
+                }else{
+                    alert("로그인이 필요합니다")
+                }
+            }
+        })
+       
+
+    }
 });
 
-function addCheck()
-{
-    if (document.getElementById('board_name').value == '0')
-    {
-        window.alert("말머리 입력 필수");
-        return false;
-    }
-    else if (document.getElementById('title').value == '')
-    {
-        window.alert("제목 입력 필수");
-        return false;
-    }
-    else if (document.getElementById('contents').value == '')
-    {
-        window.alert("내용 입력 필수");
-        return false;
-    }
-}

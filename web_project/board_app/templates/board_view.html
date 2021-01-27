@@ -13,7 +13,9 @@
                             <h3 class="tm-font-semibold tm-color-primary tm-article-title-3">{{board.title}}</h3>
                             <div class="board_view_middle">
                                 <i class="fa fa-pencil tm-board-icon"></i>
-                                <p>{{board.board_writer.name_ko}}</p><p>{{board.write_date}}</p><p>조회수:{{board.read_count}}</p>
+                                <p>{{board.board_writer.name_ko}}</p>
+                                <p>{{board.write_date}}</p>
+                                <p>조회수:{{board.read_count}}</p>
                             </div>
                             <hr>
                             <p class="board_contents">{{board.contents}}</p>
@@ -22,17 +24,98 @@
                     <article class="board_view_bottom">
                         <a href="board_list" class="text-uppercase tm-color-primary tm-font-semibold">목록</a>
                         {% if writer_check == "1" or writer_check == "2"%}
-                        <a href="javascript:boardContentsMD('mod')" class="text-uppercase tm-color-primary tm-font-semibold">수정</a>
-                        <a href="javascript:boardContentsMD('del')" class="text-uppercase tm-color-primary tm-font-semibold">삭제</a>
+                        <a href="javascript:boardContentsMD('mod')"
+                            class="text-uppercase tm-color-primary tm-font-semibold">수정</a>
+                        <a href="javascript:boardContentsMD('del')"
+                            class="text-uppercase tm-color-primary tm-font-semibold">삭제</a>
                         {% endif %}
                         {% if writer_check == "2" %}
-                        <a href="javascript:boardContentsMD('reply')" class="text-uppercase tm-color-primary tm-font-semibold">답글</a>
+                        <a href="javascript:boardContentsMD('reply')"
+                            class="text-uppercase tm-color-primary tm-font-semibold">답글</a>
                         {% endif %}
                         <form action="board_delete" method="post" name="board_contents_md">{% csrf_token %}
                             <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
                         </form>
                     </article>
+                    <hr>
+
+                    <!--------------------------------->
+                    <div class="panel">
+                        <div class="panel-body">
+                            <form action="comment_add" method="post" id="comment_add">{% csrf_token %}
+                                <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+                                <input type="hidden" id="c_list" name="c_list" value="0"></input>
+                                <input type="hidden" id="c_level" name="c_level" value="0"></input>
+                                <textarea class="form-control" id="comment_contents" name="comment_contents" rows="2"
+                                    placeholder="What are you thinking?"></textarea>
+                                <div class="mar-top clearfix">
+                                    <button class="btn btn-sm btn-primary pull-right" type="button" onclick="return loginStateCheck()">
+                                        <i class="fa fa-pencil fa-fw" ></i> 등록</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--comment 입력창-->
+
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="media-block">
+                                <div class="media-body">
+                                    {% for comment in comment_list %}
+                                    {% if comment.c_level == "0" %}
+                                    <div class="mar-btm">
+                                        <a href="javascript:void(0);"
+                                            class="btn-link text-semibold media-heading box-inline">{{comment.comment_writer.name_ko}}</a>
+                                        <p class="text-muted text-sm"> {{comment.write_time}}</p>
+                                    </div>
+                                    <p>{{comment.contents}}</p>
+
+                                    <div class="pad-ver">
+                                        <a class="btn btn-sm btn-default btn-hover-primary" id="recomment" href="javascript:recommentBoxOpen({{comment.id}},{{board.id}})">Comment</a>
+                                    </div>
+                                    <form action='comment_add' method='post'>{% csrf_token %}
+                                    <div id="recomment-box-{{comment.id}}">
+                                            
+                                    </div>
+                                    </form>
+                                    {% else %}
+                                    <div class="recomment">
+                                        <div class="media-block">
+                                            <div class="media-body">
+                                                <div class="mar-btm">
+                                                    <a href="javascript:void(0);"
+                                                        class="btn-link text-semibold media-heading box-inline">{{comment.comment_writer.name_ko}}</a>
+                                                    <p class="text-muted text-sm">{{comment.write_time}}</p>
+                                                </div>
+                                                <p>{{comment.contents}}</p>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    <hr>
+                                    {% endfor %}
+
+                                    <form action="comment_add" method="post">{% csrf_token %}
+                                        <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+                                        <input type="hidden" id="c_level" name="c_level" value="0"></input>
+                                        <textarea class="form-control" id="comment_contents" name="comment_contents"
+                                            rows="2" placeholder="What are you thinking?"></textarea>
+                                        <div class="mar-top clearfix">
+                                            <button class="btn btn-sm btn-primary pull-right" type="submit"><i
+                                                    class="fa fa-pencil fa-fw"></i> Share</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <!--===================================================-->
+                            <!-- End Newsfeed Content -->
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>

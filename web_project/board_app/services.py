@@ -1,4 +1,4 @@
-from .models import Board
+from .models import Board,Comment
 from user_app.models import User
 import datetime
 
@@ -43,18 +43,19 @@ class BoardService:
         return content
 
     def board_view(self, request):
-        board_id = request.POST['board_id']
+        board_id = request.GET['board_id']
         board = Board.objects.get(id=board_id)
         board.read_count += 1
         board.save()
-
+        comment_list = Comment.objects.filter(board_id=board_id).order_by('c_list')
         user_id = request.session.get('login_id')
         if user_id:
             if user_id == board.board_writer.email:
-                content = {'board':board, 'writer_check':'1'}
+                content = {'board':board, 'writer_check':'1','comment_list':comment_list}
             elif user_id == 'admin@admin.com':
-                content = {'board':board, 'writer_check':'2'}
-        else: content = {'board':board, 'writer_check':'0'}
+                content = {'board':board, 'writer_check':'2','comment_list':comment_list}
+        else: content = {'board':board, 'writer_check':'0','comment_list':comment_list}
+
         return content
 
     def board_modify_input(self, request):
@@ -83,3 +84,25 @@ class BoardService:
         board_list = Board.objects.filter(group=board_id)
         for board in board_list:
             board.delete()
+    
+    def comment_add(self,request,input_value):
+        user_id = request.session.get('login_id')
+        board_id = input_value.data['board_id']
+        user=User.objects.get(email=user_id)
+        board=Board.objects.get(id=board_id)
+        now = datetime.datetime.now()
+        contents=input_value.data['comment_contents']
+        c_level = input_value.data['c_level']
+        c_list =input_value.data['c_list']
+
+        if c_list == "0" :
+            new_comment = Comment(comment_writer=user,board_id=board,write_time=now.strftime('%Y-%m-%d %H:%M:%S'),contents=contents,c_list =0,c_level=c_level)
+            new_comment.save()
+            key = Comment.objects.latest('id')
+            change_comment=Comment.objects.get(id =key.id)
+            change_comment.c_list =key.id
+            change_comment.save()
+        else:
+            new_comment = Comment(comment_writer=user,board_id=board,write_time=now.strftime('%Y-%m-%d %H:%M:%S'),contents=contents,c_list = c_list,c_level=c_level)
+            new_comment.save()
+        return board_id
