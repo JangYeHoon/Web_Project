@@ -80,5 +80,6 @@ class BoardService:
         board.save()
 
     def board_delete(self, board_id):
-        board = Board.objects.get(id=board_id)
-        board.delete()
+        board_list = Board.objects.filter(group=board_id)
+        for board in board_list:
+            board.delete()
