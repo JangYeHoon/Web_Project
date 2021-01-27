@@ -43,3 +43,7 @@ def searchList_come(request):
     search_check = TicketForm(request.POST)
     context = AirService().searchList_come(search_check)
     return render(request, 'searchList_come.html', context)
+
+def db_insert(request):
+    AirService().db_insert()
+    return HttpResponseRedirect('/')
