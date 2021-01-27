@@ -5,8 +5,23 @@ import random
 
 class AirService:
     def searchList_go(self, search_check):
-        airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data'])
+        order = search_check.data['order']
         seat = search_check.data['seat']
+        if order == "1":
+            price = ''
+            if seat == '1':
+                price = 'economy_price'
+            elif seat == '2':
+                price = 'premium_price'
+            elif seat == '3':
+                price = 'business_class_price'
+            elif seat == '4':
+                price = 'first_class_price'
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by(price)
+        elif order == "2":
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by('departure_time')
+        elif order == "3":
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by('-departure_time')
         adult = search_check.data['adult']
         children = search_check.data['children']
         if children == '':
@@ -14,18 +29,33 @@ class AirService:
         section = search_check.data['section']
         read_date = search_check.data['departure_data']
         date = read_date.split("-")
-        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'] ,"date_month":date[1], "date_day":date[2], "arrival_date":search_check.data['arrival_data'], "seat":seat, "adult":adult, "children":children, "section":section}
+        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'] ,"date_month":date[1], "date_day":date[2], "arrival_date":search_check.data['arrival_data'], "seat":seat, "adult":adult, "children":children, "section":section, "order":order}
         return context
 
     def searchList_come(self, search_check):
-        airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data'])
-        go_airline = Ticket.objects.get(id=search_check.data['go_id'])
+        order = search_check.data['order']
         seat = search_check.data['seat']
+        if order == "1":
+            price = ''
+            if seat == '1':
+                price = 'economy_price'
+            elif seat == '2':
+                price = 'premium_price'
+            elif seat == '3':
+                price = 'business_class_price'
+            elif seat == '4':
+                price = 'first_class_price'
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by(price)
+        elif order == "2":
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by('departure_time')
+        elif order == "3":
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by('-departure_time')
+        go_airline = Ticket.objects.get(id=search_check.data['go_id'])
         adult = search_check.data['adult']
         children = search_check.data['children']
         read_date = search_check.data['departure_data']
         date = read_date.split("-")
-        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'], "date_month":date[1], "date_day":date[2], "seat":seat, "go_airline":go_airline, "adult":adult, "children":children}
+        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'], "date_month":date[1], "date_day":date[2], "seat":seat, "go_airline":go_airline, "adult":adult, "children":children, "order":order}
         return context
 
     def reservation_add(self, request):
