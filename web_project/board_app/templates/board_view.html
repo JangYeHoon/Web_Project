@@ -2,17 +2,41 @@
 {% load static %}
 {% load humanize %}
 {%block content%}
-<div>
-<h3>{{board.title}}</h3>
-<p>{{board.contents}}</p>
-<p>{{board.read_count}}</p>
-<form action="board_modify_input" method="post">{% csrf_token %}
-    <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
-    <button type='submit' class='text-uppercase btn-primary tm-btn-primary'>수정</a>
-</form>
-<form action="board_delete" method="post">{% csrf_token %}
-    <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
-    <button type='submit' class='text-uppercase btn-primary tm-btn-primary'>삭제</a>
-</form>
+<div class="tm-section tm-section-pad tm-bg-img" id="tm-section-5">
+    <div class="container ie-h-align-center-fix">
+        <div class="row tm-flex-align-center">
+
+            <div class="col-xs-12 col-md-12 col-lg-9 col-xl-9 mt-0 mt-sm-3 ">
+                <div class="ml-auto tm-bg-white-shadow tm-pad tm-media-container tm-bg-white">
+                    <article class="media tm-margin-b-20 tm-media-1">
+                        <div class="media-body tm-media-body-1 tm-media-body-v-center">
+                            <h3 class="tm-font-semibold tm-color-primary tm-article-title-3">{{board.title}}</h3>
+                            <div class="board_view_middle">
+                                <i class="fa fa-pencil tm-board-icon"></i>
+                                <p>{{board.board_writer.name_ko}}</p><p>{{board.write_date}}</p>
+                                <!--여기끝에 조회수하고싶은데 안돼ㅐㅐㅐㅐㅐ못하겠어 패스-->
+                            </div>
+                            <hr>
+                            <p class="board_contents">{{board.contents}}</p>
+                        </div>
+                    </article>
+                    <article class="board_view_bottom">
+                        <a href="board_list" class="text-uppercase tm-color-primary tm-font-semibold">목록</a>
+                        {% if writer_check == "1" %}
+                        <a href="javascript:boardContentsMD('mod')" class="text-uppercase tm-color-primary tm-font-semibold">수정</a>
+                        <a href="javascript:boardContentsMD('del')" class="text-uppercase tm-color-primary tm-font-semibold">삭제</a>
+                        {% endif %}
+                        <form action="board_delete" method="post" name="board_contents_md">{% csrf_token %}
+                            <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 {%endblock content%}
+{%block script%}
+<script src="{%static 'js/board-js.js'%}"></script>
+{%endblock script%}

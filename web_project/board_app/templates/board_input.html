@@ -2,14 +2,41 @@
 {% load static %}
 {% load humanize %}
 {%block content%}
-<form action="board_add" method="post">{% csrf_token %}
-    <select name="board_name" class="form-control tm-select" id="board_name">
-        <option value="0">분류</option>
-        <option value="1">여행후기</option>
-        <option value="2">고객센터</option>
-    </select>
-    <input type="text" id="title" name="title" placeholder="제목"></input><br>
-    <textarea cols="50" rows="20" id="contents" name="contents" placeholder="내용"></textarea>
-    <button type="submit" class="btn btn-primary btn-searchList">등록</button>
-</form>
+
+<div class="tm-section tm-section-pad tm-bg-img" id="tm-section-5">
+    <div class="container ie-h-align-center-fix">
+        <div class="row tm-flex-align-center">
+
+            <div class="col-xs-12 col-md-12 col-lg-9 col-xl-9 mt-0 mt-sm-3 ">
+                <div class="ml-auto tm-bg-white-shadow tm-pad tm-media-container tm-bg-white">
+                    <form action="board_add" method="post" class="contact-form">{% csrf_token %}
+                        <div class="form-group board_content_middle">
+                            <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+                            <h3 class="tm-color-primary tm-article-title-2 "> 말머리</h3>
+                            <select name="board_name" class="form-control tm-select" id="board_name">
+                                <option value="0">분류</option>
+                                <option value="1">여행후기</option>
+                                <option value="2">고객센터</option>
+                            </select>
+                        </div>
+                        <div class="form-group board_content_middle">
+                            <h3 class="tm-color-primary tm-article-title-2"> 제목</h3>
+                            <input type="text" id="title" class="form-control" name="title" placeholder="제목"
+                            placeholder="제목"></input>
+                        </div>
+                        <div class="form-group board_content_middle">
+                            <h3 class="tm-color-primary tm-article-title-2"> 내용</h3>
+                            <textarea cols="100" rows="10" id="contents" name="contents" class="form-control"
+                                placeholder="내용"></textarea>
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-primary btn-board-content">등록</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {%endblock content%}
