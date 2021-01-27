@@ -5,23 +5,27 @@ import datetime
 class BoardService:
     def board_add(self, request, input_value):
         user_id = request.session.get('login_id')
-        user = User.objects.get(email=user_id)
-        now = datetime.datetime.now()
+        if user_id:
+            user = User.objects.get(email=user_id)
+            now = datetime.datetime.now()
 
-        board_value = input_value.data['board_name']
-        if board_value == '1':
-            board_name = '여행후기'
-        elif board_value == '2':
-            board_name = '고객센터'
-        title = input_value.data['title']
-        contents = input_value.data['contents']
-        new_board = Board(board_name=board_name, title=title, board_writer=user, 
-        read_count=0, write_date=now.strftime('%Y-%m-%d %H:%M:%S'), contents=contents, group=0, depth='0')
-        new_board.save()
-        key = Board.objects.latest('id')
-        change_board = Board.objects.get(id=key.id)
-        change_board.group = key.id
-        change_board.save()
+            board_value = input_value.data['board_name']
+            if board_value == '1':
+                board_name = '여행후기'
+            elif board_value == '2':
+                board_name = '고객센터'
+            title = input_value.data['title']
+            contents = input_value.data['contents']
+            new_board = Board(board_name=board_name, title=title, board_writer=user, 
+            read_count=0, write_date=now.strftime('%Y-%m-%d %H:%M:%S'), contents=contents, group=0, depth='0')
+            new_board.save()
+            key = Board.objects.latest('id')
+            change_board = Board.objects.get(id=key.id)
+            change_board.group = key.id
+            change_board.save()
+            return True
+        else:
+            return False
     
     def board_list(self, request):
         board_list = Board.objects.all()

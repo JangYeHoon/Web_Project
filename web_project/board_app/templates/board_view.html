@@ -13,8 +13,7 @@
                             <h3 class="tm-font-semibold tm-color-primary tm-article-title-3">{{board.title}}</h3>
                             <div class="board_view_middle">
                                 <i class="fa fa-pencil tm-board-icon"></i>
-                                <p>{{board.board_writer.name_ko}}</p><p>{{board.write_date}}</p>
-                                <!--여기끝에 조회수하고싶은데 안돼ㅐㅐㅐㅐㅐ못하겠어 패스-->
+                                <p>{{board.board_writer.name_ko}}</p><p>{{board.write_date}}</p><p>조회수:{{board.read_count}}</p>
                             </div>
                             <hr>
                             <p class="board_contents">{{board.contents}}</p>
