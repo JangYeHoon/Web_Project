@@ -19,7 +19,7 @@ function airlineSelected(self){
                 result += "<input type='hidden' id='departure_place' name='departure_place' value=" + resultData[i].departure_place + "></input>"
                 result += "<input type='hidden' id='arrival_place' name='arrival_place' value=" + resultData[i].arrival_place + "></input>"
                 result += "<input type='hidden' id='departure_data' name='departure_data' value=" + resultData[i].departure_data + "></input>"
-                result += "<input type='hidden' id='arrival_data' name='arrival_data' value=" + resultData[i].departure_data + "></input>"
+                result += "<input type='hidden' id='arrival_date' name='arrival_date' value=" + resultData[i].departure_data + "></input>"
                 result += "<input type='hidden' id='adult' name='adult' value='1'></input>"
                 result += "<input type='hidden' id='children' name='children' value=''></input>"
                 result += "<input type='hidden' id='seat' name='seat' value='1'></input>"
@@ -135,7 +135,7 @@ function searchCheck(){
          window.alert("인원수 입력 필수")
          return false;
      }
-    else if(document.getElementById('section').value == "round_trip" && document.getElementById('arrival_data').value == ""){
+    else if(document.getElementById('section').value == "round_trip" && document.getElementById('arrival_date').value == ""){
         window.alert("오는날짜 입력 필수")
         return false;
     }
