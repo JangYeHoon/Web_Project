@@ -40,8 +40,8 @@
                                                 </div> 
                                                  <div class="media-body tm-media-body tm-bg-gray m">
                                                     <form action="searchList_go" method="post">{% csrf_token %}
-                                                        <input type="hidden" id="departure_place" name="departure_place" value="{{departure_place}}"></input>
-                                                        <input type="hidden" id="arrival_place" name="arrival_place" value="{{arrival_place}}"></input>
+                                                        <input type="hidden" id="departure_place" name="departure_place" value="{{arrival_place}}"></input>
+                                                        <input type="hidden" id="arrival_place" name="arrival_place" value="{{departure_place}}"></input>
                                                         <input type="hidden" id="adult" name="adult" value="{{adult}}"></input>
                                                         <input type="hidden" id="children" name="children" value="{{children}}"></input>
                                                         <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>
