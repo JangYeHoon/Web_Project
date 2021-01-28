@@ -72,9 +72,11 @@
 
                                     <div class="pad-ver">
                                         <form action="comment_delete" method="post" class="comment_delete">{% csrf_token %}
+                                            {% if writer_check == "1" or writer_check == "2"%}
                                             <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"></input>
                                             <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
                                             <button class="btn btn-sm comment_delete" type="submit"> 삭제</button>
+                                            {% endif %}
                                         </form>
                                         <a class="btn btn-sm btn-default btn-hover-primary" id="recomment" href="javascript:recommentBoxOpen({{comment.id}},{{board.id}})" >Comment</a>
                                     </div>
@@ -95,9 +97,11 @@
                                                 </div>
                                                 <p>{{comment.contents}}</p>
                                                 <form action="comment_delete" method="post" class="comment_delete">{% csrf_token %}
+                                                    {% if writer_check == "1" or writer_check == "2"%}
                                                     <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"></input>
                                                     <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
                                                     <button class="btn btn-sm comment_delete" type="submit"> 삭제</button>
+                                                    {% endif %}
                                                 </form>
                                                 <hr>
                                             </div>
