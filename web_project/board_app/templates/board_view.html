@@ -46,10 +46,10 @@
                                 <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
                                 <input type="hidden" id="c_list" name="c_list" value="0"></input>
                                 <input type="hidden" id="c_level" name="c_level" value="0"></input>
-                                <textarea class="form-control" id="comment_contents" name="comment_contents" rows="2"
+                                <textarea class="form-control comment_textarea_0" id="comment_contents" name="comment_contents" rows="2"
                                     placeholder="What are you thinking?"></textarea>
                                 <div class="mar-top clearfix">
-                                    <button class="btn btn-sm btn-primary pull-right" type="button" onclick="return loginStateCheck()">
+                                    <button class="btn btn-sm btn-primary pull-right" type="button" onclick="return loginState('0')">
                                         <i class="fa fa-pencil fa-fw" ></i> 등록</button>
                                 </div>
                             </form>
@@ -71,10 +71,10 @@
                                     <p>{{comment.contents}}</p>
 
                                     <div class="pad-ver">
-                                        <a class="btn btn-sm btn-default btn-hover-primary" id="recomment" href="javascript:recommentBoxOpen({{comment.id}},{{board.id}})">Comment</a>
+                                        <a class="btn btn-sm btn-default btn-hover-primary" id="recomment" href="javascript:recommentBoxOpen({{comment.id}},{{board.id}})" >Comment</a>
                                     </div>
-                                    <form action='comment_add' method='post'>{% csrf_token %}
-                                    <div id="recomment-box-{{comment.id}}">
+                                    <form action='comment_add' method='post' class="recomment_add_{{comment.id}}">{% csrf_token %}
+                                    <div id="recomment-box-{{comment.id}}" class="close-box">
                                             
                                     </div>
                                     </form>

@@ -12,20 +12,32 @@ function setPageNav(){
         });   
     }
 }
-function loginStateCheck(){
+function loginState(addr){
+    var id ="";
+    if(addr == "0"){
+        id="#comment_add"
+    }else{
+        id=".recomment_add_"+addr
+    }
+   if($('.comment_textarea_'+addr).val() == ""){
+      alert("내용을 입력해주세요")
+      return false;
+   }else{
     $.ajax({
         url:'loginStateCheck',
         datatype: 'json',
         success:function(data){
            str = data["state"]+"";
            if (str == "login"){
-                return $('#comment_add').submit();
+                return $(id).submit();
             }else{
                 alert("로그인이 필요합니다")
                 return false;
             }
         }
     })
+   }
+
 }
 function addCheck()
 {
@@ -102,10 +114,10 @@ $(document).ready(function(){
                 var commentBox = "<input type='hidden' id='board_id' name='board_id' value='"+boardId+"'></input>";
                     commentBox += "<input type='hidden' id='c_list' name='c_list' value='"+commentId+"'></input>";
                     commentBox += "<input type='hidden' id='c_level' name='c_level' value='1'></input>";
-                    commentBox += "<textarea class='form-control' id='comment_contents' name='comment_contents' rows='2' placeholder='What are you thinking?'>";
+                    commentBox += "<textarea class='form-control comment_textarea_"+commentId+" id='comment_contents' name='comment_contents' rows='2' placeholder='What are you thinking?'>";
                     commentBox += "</textarea>";
                     commentBox += "<div class='mar-top clearfix'>";
-                    commentBox += " <button class='btn btn-sm btn-primary pull-right' type='submit'>";
+                    commentBox += " <button class='btn btn-sm btn-primary pull-right' type='button' onclick='return loginState("+commentId+")'>";
                     commentBox += " <i class='fa fa-pencil fa-fw'></i> 등록</button>";
                     commentBox += " </div>";
                    
