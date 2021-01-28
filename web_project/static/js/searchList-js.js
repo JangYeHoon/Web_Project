@@ -52,7 +52,12 @@ $(document).ready(function(){
    $('#selectedDate').datepicker({
        dateFormat:"yy-mm-dd",
        onSelect:function(dateText,inst){
+           var state =$('#ticket_state').val();
+           if(state== "go"){
             $('#departure_data').val(dateText);
+        }else if(state == "come"){
+            $('.research_arrival_data').val(dateText);
+          }
            $('#selectedDate').hide();
             $('#research').submit();
        }

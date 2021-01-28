@@ -9,9 +9,10 @@
                             <div class="tm-bg-white">
                                 <div class="tm-bg-primary tm-sidebar-pad">
                                     <h3 class="tm-color-white tm-sidebar-title">가는편 선택|{{date_month}}월 {{date_day}}일</h3>
-                                    <i class="fa fa-calendar fa-2x" id="dateIcon"></i>
+                                    <i class="fa fa-calendar fa-2x" id="dateIcon" ></i>
                                     <input name="check-in" type="text" id="selectedDate" value="{{departure_data}}">
                                     <form action="searchList_go" method="post" id="research">{% csrf_token %}
+                                        <input type="hidden" id="ticket_state" name="ticket_state" value="go"></input>
                                         <input type="hidden" id="departure_place" name="departure_place" value="{{departure_place}}"></input>
                                         <input type="hidden" id="arrival_place" name="arrival_place" value="{{arrival_place}}"></input>
                                         <input type="hidden" id="departure_data" name="departure_data" value="{{departure_data}}"></input>
