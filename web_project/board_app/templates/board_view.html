@@ -71,13 +71,19 @@
                                     <p>{{comment.contents}}</p>
 
                                     <div class="pad-ver">
+                                        <form action="comment_delete" method="post" class="comment_delete">{% csrf_token %}
+                                            <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"></input>
+                                            <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+                                            <button class="btn btn-sm comment_delete" type="submit"> 삭제</button>
+                                        </form>
                                         <a class="btn btn-sm btn-default btn-hover-primary" id="recomment" href="javascript:recommentBoxOpen({{comment.id}},{{board.id}})" >Comment</a>
                                     </div>
                                     <form action='comment_add' method='post' class="recomment_add_{{comment.id}}">{% csrf_token %}
-                                    <div id="recomment-box-{{comment.id}}" class="close-box">
+                                    <div id="recomment-box-{{comment.id}}">
                                             
                                     </div>
                                     </form>
+                                    <hr>
                                     {% else %}
                                     <div class="recomment">
                                         <div class="media-block">
@@ -88,13 +94,17 @@
                                                     <p class="text-muted text-sm">{{comment.write_time}}</p>
                                                 </div>
                                                 <p>{{comment.contents}}</p>
+                                                <form action="comment_delete" method="post" class="comment_delete">{% csrf_token %}
+                                                    <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"></input>
+                                                    <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
+                                                    <button class="btn btn-sm comment_delete" type="submit"> 삭제</button>
+                                                </form>
                                                 <hr>
                                             </div>
                                         </div>
                                     </div>
                                     {% endif %}
 
-                                    <hr>
                                     {% endfor %}
                                 </div>
                             </div>

@@ -11,4 +11,5 @@ urlpatterns = [
     path('board_delete', views.board_delete, name='board_delete'),
     path('comment_add', views.comment_add, name='comment_add'),
     path('loginStateCheck', views.loginStateCheck, name='loginStateCheck'),
+    path('comment_delete', views.comment_delete, name='comment_delete'),
 ]

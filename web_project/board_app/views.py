@@ -52,3 +52,9 @@ def loginStateCheck(request):
     else :
         state={'state':"login"}
     return JsonResponse(state)
+
+def comment_delete(request):
+    board_id = request.POST['board_id']
+    comment_id = request.POST['comment_id']
+    BoardService().comment_delete(comment_id)
+    return HttpResponseRedirect('board_view?board_id='+board_id)

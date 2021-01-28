@@ -104,6 +104,11 @@ $(document).ready(function(){
         form.submit();
     }
 
+    commentDel =function(id){
+        var form = document.getElementsByClassName('comment_delete_'+id)
+        alert(form.comment_id.value)
+    }
+
     recommentBoxOpen = function(commentId,boardId){
         $.ajax({
             url:'loginStateCheck',
