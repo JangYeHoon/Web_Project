@@ -20,6 +20,41 @@
                                         <input type="hidden" id="children" name="children" value="{{children}}"></input>
                                         <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>
                                         <input type="hidden" id="section" name="section" value="{{section}}"></input>
+                                        <input type="hidden" id="order" name="order" value="{{order}}"></input>
+                                        <button type="submit" class="btn-search" >검색</a>
+                                    </form>
+                                </div>
+                                <div>
+                                    <form action="searchList_go" method="post" id="order-search">{% csrf_token %}
+                                        <input type="hidden" id="departure_place" name="departure_place" value="{{departure_place}}"></input>
+                                        <input type="hidden" id="arrival_place" name="arrival_place" value="{{arrival_place}}"></input>
+                                        <input type="hidden" id="departure_data" name="departure_data" value="{{departure_data}}"></input>
+                                        <input type="hidden" id="arrival_data" name="arrival_data" value="{{arrival_date}}"></input>
+                                        <input type="hidden" id="adult" name="adult" value="{{adult}}"></input>
+                                        <input type="hidden" id="children" name="children" value="{{children}}"></input>
+                                        <input type="hidden" id="seat" name="seat" value="{{seat}}"></input>
+                                        <input type="hidden" id="section" name="section" value="{{section}}"></input>
+                                        <select name="order" class="form-control tm-select" id="order" onchange="javascript:this.form.submit()">
+                                            {% if order %}
+                                                {% if order == '1' %}
+                                                    <option value="1" selected>가격(낮은순)</option>
+                                                    <option value="2">출발시간(이른순)</option>
+                                                    <option value="3">출발시간(늦은순)</option>
+                                                {% elif order == '2' %}
+                                                    <option value="1">가격(낮은순)</option>
+                                                    <option value="2" selected>출발시간(이른순)</option>
+                                                    <option value="3">출발시간(늦은순)</option>
+                                                {% elif order == '3' %}
+                                                    <option value="1">가격(낮은순)</option>
+                                                    <option value="2">출발시간(이른순)</option>
+                                                    <option value="3" selected>출발시간(늦은순)</option>
+                                                {% endif %}
+                                            {% else %}
+                                                <option value="1">가격(낮은순)</option>
+                                                <option value="2">출발시간(이른순)</option>
+                                                <option value="3">출발시간(늦은순)</option>
+                                            {% endif %}
+                                        </select>
                                         <button type="submit" class="btn-search" >검색</a>
                                     </form>
                                 </div>
@@ -75,6 +110,11 @@
                                                         <input type="hidden" id="departure_data" name="departure_data" value="{{arrival_date}}"></input>
                                                         <input type="hidden" id="departure_place" name="departure_place" value="{{airline.arrival_place}}"></input>
                                                         <input type="hidden" id="arrival_place" name="arrival_place" value="{{airline.departure_place}}"></input>
+                                                        {% if order %}
+                                                            <input type="hidden" id="order" name="order" value="{{order}}"></input>
+                                                        {% else %}
+                                                            <input type="hidden" id="order" name="order" value="1"></input>
+                                                        {% endif %}
                                                         <button type="submit" class="btn btn-primary btn-searchList">선택</button>
                                                     </form>
                                                     {% endif %}
