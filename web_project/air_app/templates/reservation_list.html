@@ -7,6 +7,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-recommended-container">
                             <div class="tm-bg-white">
+                                {% if reservation_list%}
                                 {% for reservation in reservation_list %}
                                 <div class="tm-bg-primary tm-sidebar-pad reservation-header">
                                     <div>
@@ -102,6 +103,13 @@
                                     </ul>
                                 </div>
                                 {% endfor %}
+                                {% else %}
+                                    <li class="searchList-item">
+                                        <div class="media-body tm-media-body tm-bg-gray ">
+                                            <h4 class="text-uppercase tm-font-semibold tm-sidebar-item-title">예약내역이 없습니다</h4>
+                                        </div>
+                                    </li>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

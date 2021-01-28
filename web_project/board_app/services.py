@@ -25,9 +25,13 @@ class BoardService:
         title = input_value.data['title']
         contents = input_value.data['contents']
         if user_id == 'admin@admin.com':
-            board_id = input_value.data['board_id']
-            new_board = Board(board_name=board_name, title=title, board_writer=user,
-                              read_count=0, write_date=now.strftime('%Y-%m-%d %H:%M:%S'), contents=contents, group=board_id, depth='1')
+            if request.POST.get('board_id'):
+                board_id = input_value.data['board_id']
+                new_board = Board(board_name=board_name, title=title, board_writer=user,
+                                read_count=0, write_date=now.strftime('%Y-%m-%d %H:%M:%S'), contents=contents, group=board_id, depth='1')
+            else:
+                new_board = Board(board_name=board_name, title=title, board_writer=user,
+                                read_count=0, write_date=now.strftime('%Y-%m-%d %H:%M:%S'), contents=contents, group=0, depth='0')
             new_board.save()
         else:
             new_board = Board(board_name=board_name, title=title, board_writer=user,
@@ -48,20 +52,17 @@ class BoardService:
         board = Board.objects.get(id=board_id)
         board.read_count += 1
         board.save()
-        comment_list = Comment.objects.filter(
-            board_id=board_id).order_by('c_list')
+        comment_list = Comment.objects.filter(board_id=board_id).order_by('c_list')
         user_id = request.session.get('login_id')
         if user_id:
             if user_id == board.board_writer.email:
-                content = {'board': board, 'writer_check': '1',
-                           'comment_list': comment_list}
+                content = {'board': board, 'writer_check': '1','comment_list': comment_list}
             elif user_id == 'admin@admin.com':
-                content = {'board': board, 'writer_check': '2',
-                           'comment_list': comment_list}
+                content = {'board': board, 'writer_check': '2', 'comment_list': comment_list}
+            else:
+                content = {'board': board, 'writer_check': '0', 'comment_list': comment_list}
         else:
-            content = {'board': board, 'writer_check': '0',
-                       'comment_list': comment_list}
-
+            content = {'board': board, 'writer_check': '0', 'comment_list': comment_list}
         return content
 
     def board_modify_input(self, request):
@@ -87,9 +88,14 @@ class BoardService:
         board.save()
 
     def board_delete(self, board_id):
-        board_list = Board.objects.filter(group=board_id)
-        for board in board_list:
-            board.delete()
+        board_get = Board.objects.get(id=board_id)
+        
+        if board_get.depth == '0':
+            board_list = Board.objects.filter(group=board_id)
+            for board in board_list:
+                board.delete()
+        else:
+            board_get.delete()
 
     def comment_add(self, request, input_value):
         user_id = request.session.get('login_id')
@@ -118,7 +124,7 @@ class BoardService:
     def comment_delete(self, comment_id):
         level = Comment.objects.get(id=comment_id)
         print(level.c_level)
-        if level.c_level == 0:
+        if level.c_level == '0':
             comment_list = Comment.objects.filter(c_list=comment_id)
             for comment in comment_list:
                 comment.delete()

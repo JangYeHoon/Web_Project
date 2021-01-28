@@ -24,6 +24,7 @@ function airlineSelected(self){
                 result += "<input type='hidden' id='children' name='children' value=''></input>"
                 result += "<input type='hidden' id='seat' name='seat' value='1'></input>"
                 result += "<input type='hidden' id='section' name='section' value='one_way'></input>"
+                result += "<input type='hidden' id='order' name='order' value='1'></input>"
                 result += "<button type='submit' class='text-uppercase btn-primary tm-btn-primary'>검색</a>"
                 result += "</form>"
                 result += " </article>";

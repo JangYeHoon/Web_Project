@@ -97,7 +97,7 @@
                                                 </div>
                                                 <p>{{comment.contents}}</p>
                                                 <form action="comment_delete" method="post" class="comment_delete">{% csrf_token %}
-                                                    {% if writer_check == "1" or writer_check == "2"%}
+                                                    {% if request.session.login_id == comment.comment_writer.email or writer_check == "2"%}
                                                     <input type="hidden" id="comment_id" name="comment_id" value="{{comment.id}}"></input>
                                                     <input type="hidden" id="board_id" name="board_id" value="{{board.id}}"></input>
                                                     <button class="btn btn-sm comment_delete" type="submit"> 삭제</button>

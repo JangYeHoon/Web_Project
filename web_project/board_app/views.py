@@ -12,7 +12,7 @@ def board_list(request):
 
 def board_input(request):
     user_id = request.session.get('login_id')
-    if user_id == 'admin@admin.com':
+    if user_id == 'admin@admin.com' and request.POST.get('board_id'):
         content = BoardService().board_input(request)
         return render(request, 'board_input.html', content)
     else:

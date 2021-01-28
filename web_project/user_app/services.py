@@ -25,11 +25,12 @@ class UserService:
         if section == 'round_trip':
             come_ticket_id = request.POST['come_ticket_id']
             come_airline = Ticket.objects.get(id=come_ticket_id)
-            new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=come_airline, price=float(price))
+            new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=come_airline, price=int(price))
         elif section == 'one_way':
-            new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=None, price=float(price))
+            new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=None, price=int(price))
         new_reservation.save()
-        context = {"new_reservation":new_reservation}
+        price = int(price)
+        context = {"new_reservation":new_reservation, "price":price}
         return context
     
     def id_overlap_check(self,email):
