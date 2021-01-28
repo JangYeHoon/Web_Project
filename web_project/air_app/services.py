@@ -29,7 +29,7 @@ class AirService:
         section = search_check.data['section']
         read_date = search_check.data['departure_data']
         date = read_date.split("-")
-        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'] ,"date_month":date[1], "date_day":date[2], "arrival_date":search_check.data['arrival_data'], "seat":seat, "adult":adult, "children":children, "section":section, "order":order}
+        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'] ,"date_month":date[1], "date_day":date[2], "arrival_date":search_check.data['arrival_date'], "seat":seat, "adult":adult, "children":children, "section":section, "order":order}
         return context
 
     def searchList_come(self, search_check):
@@ -45,17 +45,18 @@ class AirService:
                 price = 'business_class_price'
             elif seat == '4':
                 price = 'first_class_price'
-            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by(price)
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['arrival_date']).order_by(price)
         elif order == "2":
-            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by('departure_time')
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['arrival_date']).order_by('departure_time')
         elif order == "3":
-            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['departure_data']).order_by('-departure_time')
+            airline_list = Ticket.objects.filter(departure_place=search_check.data['departure_place'], arrival_place=search_check.data['arrival_place'], departure_data=search_check.data['arrival_date']).order_by('-departure_time')
         go_airline = Ticket.objects.get(id=search_check.data['go_id'])
         adult = search_check.data['adult']
         children = search_check.data['children']
         read_date = search_check.data['departure_data']
-        date = read_date.split("-")
-        context = {"airline_list":airline_list, 'departure_data':read_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'], "date_month":date[1], "date_day":date[2], "seat":seat, "go_airline":go_airline, "adult":adult, "children":children, "order":order}
+        arrival_date = search_check.data['arrival_date']
+        date = arrival_date.split("-")
+        context = {"airline_list":airline_list, 'departure_data':read_date, 'arrival_date':arrival_date, 'departure_place':search_check.data['departure_place'], 'arrival_place':search_check.data['arrival_place'], "date_month":date[1], "date_day":date[2], "seat":seat, "go_airline":go_airline, "adult":adult, "children":children, "order":order}
         return context
 
     def reservation_add(self, request):
@@ -93,7 +94,7 @@ class AirService:
                 come_price = come_airline.first_class_price
             price = (go_price + come_price) * int(adult) + ((go_price + come_price) * 0.9) * int(children)
             if check_user == True:
-                new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=come_airline, price=price)
+                new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=come_airline, price=int(price))
         elif section == 'one_way':
             if seat == '1':
                 go_price = go_airline.economy_price
@@ -105,10 +106,11 @@ class AirService:
                 go_price = go_airline.first_class_price
             price = go_price * int(adult) + (go_price * 0.9) * int(children)
             if check_user == True:
-                new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=None, price=price)
+                new_reservation = Reservation(user_id=user, go_ticket_id=go_airline, come_ticket_id=None, price=int(price))
+        price = int(price)
         if check_user == True:
             new_reservation.save()
-            context = {"new_reservation":new_reservation}
+            context = {"new_reservation":new_reservation, "price":price}
         else:
             if section == 'round_trip':
                 context = {"go_ticket_id":go_airline_id, "come_ticket_id":come_airline_id, "price":price, "section":section}

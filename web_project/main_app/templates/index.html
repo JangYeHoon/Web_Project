@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="form-group tm-form-element tm-form-element-50">
                                             <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
-                                            <input name="arrival_data" type="date" class="form-control" id="arrival_data" placeholder="도착하는 날짜">
+                                            <input name="arrival_date" type="date" class="form-control" id="arrival_date" placeholder="도착하는 날짜">
                                         </div>
                                     </div>
 
@@ -114,7 +114,7 @@
                                             <input type="hidden" id="departure_place" name="departure_place" value="{{rank.go_ticket_id.departure_place}}"></input>
                                             <input type="hidden" id="arrival_place" name="arrival_place" value="{{rank.go_ticket_id.arrival_place}}"></input>
                                             <input type="hidden" id="departure_data" name="departure_data" value="{{rank.go_ticket_id.departure_data | date:'Y-m-d'}}"></input>
-                                            <input type="hidden" id="arrival_data" name="arrival_data" value="{{rank.come_ticket_id.departure_data | date:'Y-m-d'}}"></input>
+                                            <input type="hidden" id="arrival_date" name="arrival_date" value="{{rank.come_ticket_id.departure_data | date:'Y-m-d'}}"></input>
                                             <input type="hidden" id="adult" name="adult" value="1"></input>
                                             <input type="hidden" id="children" name="children" value=""></input>
                                             <input type="hidden" id="seat" name="seat" value="1"></input>
@@ -158,7 +158,7 @@
                                     <input type="hidden" id="departure_place" name="departure_place" value="{{ticket.departure_place}}"></input>
                                     <input type='hidden' id='arrival_place' name='arrival_place' value='{{ticket.arrival_place}}'></input>
                                     <input type='hidden' id='departure_data' name='departure_data' value="{{ticket.departure_data | date:'Y-m-d'}}"></input>
-                                    <input type='hidden' id='arrival_data' name='arrival_data' value="{{ticket.departure_data | date:'Y-m-d'}}"></input>
+                                    <input type='hidden' id='arrival_date' name='arrival_date' value="{{ticket.departure_data | date:'Y-m-d'}}"></input>
                                     <input type='hidden' id='adult' name='adult' value='1'></input>
                                     <input type='hidden' id='children' name='children' value=''></input>
                                     <input type='hidden' id='seat' name='seat' value='1'></input>
